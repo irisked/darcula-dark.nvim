@@ -254,9 +254,6 @@ M.configure_highlights = function()
   hi(0, "ConflictMarkerTheirs", { bg = colors.dark_slate_gray })
   hi(0, "Constant", { ctermfg = 13, fg = colors.dark_apricot })
 
-  -- copilot.vim
-  hi(0, "CopilotSuggestion", { ctermfg = 244, fg = colors.slate_gray })
-
   -- cursor
   hi(0, "Cursor", { bg = colors.light_gray, fg = colors.gray_asparagus })
   hi(0, "CursorColumn", { bg = colors.gray_asparagus, ctermbg = 242 })
@@ -563,7 +560,7 @@ M.configure_highlights = function()
   -- telescope
   hi(0, "TelescopeBorder", { bg = colors.wite, fg = colors.white })
   hi(0, "TelescopeNormal", { bg = colors.jet, fg = colors.silver_chalice })
-  hi(0, "TelescopePreviewLine", { bg = colors.jet })
+  hi(0, "TelescopePreviewLine", { bg = colors.ochre })
   hi(0, "TelescopePreviewTitle", { bg = colors.ochre, fg = colors.jet })
   hi(0, "TelescopePromptBorder", { bg = colors.jet, fg = colors.white })
   hi(0, "TelescopePromptNormal", { bg = colors.jet, fg = colors.silver_chalice })
