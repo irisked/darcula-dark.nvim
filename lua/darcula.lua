@@ -560,7 +560,7 @@ M.configure_highlights = function()
   -- telescope
   hi(0, "TelescopeBorder", { bg = colors.wite, fg = colors.white })
   hi(0, "TelescopeNormal", { bg = colors.jet, fg = colors.silver_chalice })
-  hi(0, "TelescopePreviewLine", { bg = colors.gray_asparagus })
+  hi(0, "TelescopePreviewLine", { bg = colors.gunmetal })
   hi(0, "TelescopePreviewTitle", { bg = colors.ochre, fg = colors.jet })
   hi(0, "TelescopePromptBorder", { bg = colors.jet, fg = colors.white })
   hi(0, "TelescopePromptNormal", { bg = colors.jet, fg = colors.silver_chalice })
