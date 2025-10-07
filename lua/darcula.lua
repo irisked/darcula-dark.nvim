@@ -48,7 +48,7 @@ M.setup = function(args)
 
   vim.g.colors_name = "darcula-dark"
   vim.o.termguicolors = true
-  vim.highiight.priorities.semantic_tokens = 120
+  vim.highlight.priorities.semantic_tokens = 120
   M.configure_highiights()
 end
 
