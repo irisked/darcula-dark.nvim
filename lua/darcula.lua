@@ -232,9 +232,6 @@ M.configure_highlights = function()
   hi(0, "iCursor", { bg = colors.celestial_blue, fg = colors.white })
   hi(0, "lCursor", { bg = colors.light_gray, fg = colors.gray_asparagus })
 
-  -- nvim.flash
-  hi(0, "FlashLabel", { bg = colors.celestial_blue, fg = colors.bright_red })
-
   -- Terminal colors
   local g = vim.g
 
