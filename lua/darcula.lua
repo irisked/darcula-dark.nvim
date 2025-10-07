@@ -85,7 +85,7 @@ M.configure_highlights = function()
 
   -- Syntax
   hi("Identifier",           { fg = colors.silver_chalice, bold = true })
-  hi("Function",            { fg = colors.ochre, bold = true })
+  hi("Function",            { fg = colors.dark_khaki })
   hi("Keyword",             { fg = colors.ochre, bold = true })
   hi("Statement",           { fg = colors.ochre })
   hi("Type",                { fg = colors.purple })
@@ -122,7 +122,7 @@ M.configure_highlights = function()
   -- Tree-sitter
   hi("@comment",            { fg = colors.ash_gray, italic = true })
   hi("@keyword",            { fg = colors.ochre })
-  hi("@function",           { fg = colors.maya_blue })
+  hi("@function",           { fg = colors.dark_khaki })
   hi("@type",               { fg = colors.purple })
   hi("@string",             { fg = colors.forest_green })
   hi("@number",             { fg = colors.steel_blue })
