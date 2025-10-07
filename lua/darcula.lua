@@ -115,9 +115,9 @@ local function set_highlights()
 
   -- Plugins
   -- nvim.flash
-  hi(0, "FlashMatch", { fg = colors.ochre })
-  hi(0, "FlashCurrent", { fg = colors.cadet_grey })
-  hi(0, "FlashLabel", { fg = colors.ghost_white, bg = gray_asparagus })
+  hl(0, "FlashMatch", { fg = colors.ochre })
+  hl(0, "FlashCurrent", { fg = colors.cadet_grey })
+  hl(0, "FlashLabel", { fg = colors.ghost_white, bg = gray_asparagus })
 
   -- Terminal colors
   vim.g.terminal_color_0  = colors.jet
@@ -138,12 +138,8 @@ local function set_highlights()
   vim.g.terminal_color_15 = colors.silver_chalice
 end
 
--- ============================================================
--- ⚙️ ENTRY POINT
--- ============================================================
 function M.setup()
   vim.o.termguicolors = true
-  vim.g.colors_name = "darcula_refined"
   vim.cmd("hi clear")
   set_highlights()
 end
