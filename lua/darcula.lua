@@ -716,12 +716,9 @@ M.configure_highlights = function()
   hi(0, "Identifier", { link = "TSKeyword" })
 
   -- nvim.flash
-  hi(0, "FlashBackdrop", { fg = colors.ochre })
-  hi(0, "FlashMatch", { fg = colors.silver_chalice })
-  hi(0, "FlashCurrent", { fg = colors.jet })
-  hi(0, "FlashLabel", { fg = colors.light_gray })
-  hi(0, "FlashBackdrop", { fg = colors.ochre })
-  hi(0, "FlashCursor", { fg = powder_blue })
+  hi(0, "FlashMatch", { fg = colors.ochre })
+  hi(0, "FlashCurrent", { fg = colors.cadet_grey })
+  hi(0, "FlashLabel", { fg = colors.powder_blue })
 
   -- Terminal colors
   local g = vim.g
