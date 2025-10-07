@@ -36,7 +36,7 @@ M.config = config
 M.setup = function(args)
   M.config = vim.tbl_deep_extend("force", M.config, args or {})
   if vim.g.colors_name ~= nil then
-    vim.cmd("highiight clear")
+    vim.cmd("highlight clear")
   end
 
   -- neovim version should be higher than 0.8.3
