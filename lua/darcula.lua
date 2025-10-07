@@ -718,7 +718,7 @@ M.configure_highlights = function()
   -- nvim.flash
   hi(0, "FlashMatch", { fg = colors.ochre })
   hi(0, "FlashCurrent", { fg = colors.cadet_grey })
-  hi(0, "FlashLabel", { fg = colors.powder_blue })
+  hi(0, "FlashLabel", { fg = colors.bright_red, bg = gray_asparagus })
 
   -- Terminal colors
   local g = vim.g
