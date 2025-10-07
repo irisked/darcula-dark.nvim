@@ -96,7 +96,7 @@ M.configure_highlights = function()
   hi("Boolean",             { fg = colors.steel_blue })
   hi("Operator",            { fg = colors.silver_chalice })
   hi("PreProc",             { fg = colors.ochre })
-  hi("Special",             { fg = colors.maya_blue })
+  hi("Special",             { fg = colors.ochre, bold = true })
   hi("Todo",                { fg = colors.dark_khaki, bold = true })
   hi("Error",               { fg = colors.bright_red })
 
