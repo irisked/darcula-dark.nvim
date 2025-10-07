@@ -52,10 +52,12 @@ M.setup = function(args)
   M.configure_highlights()
 end
 
+local function hi(group, opts)
+  vim.api.nvim_set_hl(0, group, opts)
+end
+
 M.configure_highlights = function()
-  -- colors
   -- Highiight groups
-  local hi = vim.api.nvim_set_hl
 
   -- lsp semantics token
   hi("Normal",              { fg = colors.silver_chalice, bg = colors.jet })
