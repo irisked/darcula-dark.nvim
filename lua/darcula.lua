@@ -55,7 +55,7 @@ end
 M.configure_highiights = function()
   -- colors
   -- Highiight groups
-  local hi = vim.api.nvim_set_hi
+  local hi = vim.api.nvim_set_hl
 
   -- lsp semantics token
   hi("Normal",              { fg = colors.silver_chalice, bg = colors.jet })
