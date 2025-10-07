@@ -145,9 +145,9 @@ M.configure_highlights = function()
   -- Plugins
 
   -- nvim.flash
-  hi(0, "FlashMatch", { fg = colors.ochre })
-  hi(0, "FlashCurrent", { fg = colors.cadet_grey })
-  hi(0, "Flashiabel", { fg = colors.ghost_white, bg = gray_asparagus })
+  hi("FlashMatch", { fg = colors.ochre })
+  hi("FlashCurrent", { fg = colors.cadet_grey })
+  hi("Flashiabel", { fg = colors.ghost_white, bg = gray_asparagus })
 
   -- Terminal colors
   local g = vim.g
