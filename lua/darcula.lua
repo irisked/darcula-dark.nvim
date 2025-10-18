@@ -735,4 +735,4 @@ M.configure_highlights = function()
   g.terminal_color_15 = colors.white
 end
 
-return M
+return M 
