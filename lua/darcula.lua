@@ -5,7 +5,7 @@ local config = {}
 -- Accurate IntelliJ IDEA Darcula color palette
 local colors = {
   -- Background and foreground
-  bg = "#1A1A1A",
+  bg = "#202020",
   fg = "#B9C7D6",
 
   -- UI colors
