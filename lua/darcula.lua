@@ -2,52 +2,69 @@
 ---@field opt string Your config option
 local config = {}
 
+-- Accurate IntelliJ IDEA Darcula color palette
 local colors = {
-  light_gray = "#EEEEEE", -- 5
+  -- Background and foreground
+  bg = "#2B2B2B",
+  fg = "#A9B7C6",
+
+  -- UI colors
+  ui_bg = "#3C3F41",
+  ui_border = "#323232",
+  selection = "#214283",
+  line_highlight = "#323232",
+  cursor = "#BBBBBB",
+  gutter_fg = "#606366",
+  gutter_bg = "#313335",
+
+  -- Syntax colors (IntelliJ Darcula)
+  keyword = "#CC7832",           -- Orange: keywords, control flow
+  string = "#6A8759",            -- Green: strings
+  number = "#6897BB",            -- Blue: numbers
+  comment = "#808080",           -- Gray: comments
+  doc_comment = "#629755",       -- Doc green: documentation
+  function_name = "#FFC66D",     -- Yellow: function names
+  class_name = "#A9B7C6",        -- Default foreground for classes
+  constant = "#9876AA",          -- Purple: constants
+  parameter = "#A9B7C6",         -- Default foreground
+  type = "#8888C6",              -- Built-in type purple
+  decorator = "#BBB529",         -- Decorator yellow-green
+  tag = "#E8BF6A",               -- Tag yellow
+  attribute = "#BABABA",         -- Attribute gray
+
+  -- Diff colors
+  diff_add = "#294436",
+  diff_change = "#385570",
+  diff_delete = "#484A4A",
+  diff_text = "#385570",
+
+  -- Diagnostic colors
+  error = "#BC3F3C",
+  warning = "#A9B7C6",
+  info = "#6A8759",
+  hint = "#6897BB",
+
+  -- Git colors
+  git_add = "#629755",
+  git_change = "#6897BB",
+  git_delete = "#BC3F3C",
+
+  -- Special colors
+  todo = "#A8C023",
+  link = "#287BDE",
+  match = "#3A4D2A",
+  search = "#32593D",
+
+  -- UI element colors
+  pmenu_bg = "#3C3F41",
+  pmenu_sel = "#113A5C",
+
+  -- Additional colors
   white = "#FFFFFF",
-  ghost_white = "#E8E8E8",
-  purple = "#9876aa",
-  battleship_gray = "#4B4E4F", -- 27
-  davys_grey = "#666666", -- 2
-  gunmetal = "#484848", -- 11
-  gray = "#808080", -- 18
-  cadet_grey = "#ABB2BF", -- 12
-  dark_khaki = "#D3B987", -- 30
-  silver_chalice = "#C9D0D3", -- 51
-  atomic_tangerine = "#FFC66D", -- 1
-  malachite = "#4DD158", -- 1
-  electric_lime = "#A9FF68", -- 8
-  metallic_silver = "#6D8086", -- 7
-  sangria = "#881515", -- 2
-  powder_blue = "#B3DEEF", -- 31
-  electric_cyan = "#00F1F5", -- 15
-  blue_lagoon = "#2AC3DE", -- 1
-  dark_lava = "#BF4537", -- 1
-  green = "#008000", -- 2
-  ochre = "#CC7832", -- 4
-  raisin_black = "#392A52", -- 1
-  granny_smith_apple = "#98BE65", -- 71
-  little_boy_blue = "#7BA1C0", -- 1
-  myrtle = "#2E5049", -- 1
-  light_crimson = "#AD475F", -- 1
-  rhythm = "#151838", -- 1
-  lemon_glacier = "#C9D05C", -- 22
-  yellow = "#FFFF00", -- 2
-  dark_coral = "#C95942", -- 1
-  jet = "#242424", -- 5
-  cadet = "#596F77", -- 16
-  celestial_blue = "#2B8DB3", -- 1
-  viridian_green = "#2F7366", -- 1
-  fashion_fuchsia = "#F70067", -- 4
-  black = "#000000", -- 21
-  slate_gray = "#73797E", -- 5
-  deep_magenta = "#C955AE", -- 1
-  camouflage_green = "#6A8759", -- 1
-  dark_apricot = "#DC9656", -- 16
-  gray_asparagus = "#303030", -- 18
-  dark_slate_gray = "#344F69", -- 1
-  leather_brown = "#A16946", -- 6
-  bright_red = "#F43753", -- 57
+  black = "#000000",
+  bright_red = "#FF6B68",
+  bright_green = "#A8FF60",
+  bright_yellow = "#FFD700",
 }
 
 ---@class MyModule
@@ -57,8 +74,6 @@ local M = {}
 M.config = config
 
 ---@param args Config?
--- you can define your setup function here. Usually configurations can be merged, accepting outside params and
--- you can also put some validation here for those.
 M.setup = function(args)
   M.config = vim.tbl_deep_extend("force", M.config, args or {})
   if vim.g.colors_name ~= nil then
@@ -79,663 +94,663 @@ M.setup = function(args)
 end
 
 M.configure_highlights = function()
-  -- colors
-  -- Highlight groups
   local hi = vim.api.nvim_set_hl
 
-  -- lsp semantics token
-  hi(0, "@attribute", { link = "TSAttribute" })
-  hi(0, "@boolean", { link = "TSBoolean" })
-  hi(0, "@character", { link = "TSCharacter" })
-  hi(0, "@character.special", { link = "SpecialChar" })
-  hi(0, "@class", { link = "TSType" })
-  hi(0, "@comment", { link = "TSComment" })
-  hi(0, "@conditional", { link = "TSConditional" })
-  hi(0, "@constant", { link = "TSConstant" })
-  hi(0, "@constant.builtin", { link = "TSConstantBuiltin" })
-  hi(0, "@constant.macro", { link = "TSConstant" })
-  hi(0, "@constructor", { link = "TSConstructor" })
-  hi(0, "@decorator", { link = "Identifier" })
-  hi(0, "@enum", { link = "TSType" })
-  hi(0, "@enumMember", { link = "Constant" })
-  hi(0, "@error", { link = "TSError" })
-  hi(0, "@event", { link = "Identifier" })
-  hi(0, "@exception", { link = "TSException" })
-  hi(0, "@field", { link = "TSField" })
-  hi(0, "@float", { link = "TSFloat" })
-  hi(0, "@function", { link = "TSFunction" })
-  hi(0, "@function.builtin", { link = "TSFuncBuiltin" })
-  hi(0, "@function.call", { link = "TSFunctionCall" })
-  hi(0, "@function.macro", { link = "TSFuncMacro" })
-  hi(0, "@include", { link = "TSInclude" })
-  hi(0, "@interface", { link = "Structure" })
-  hi(0, "@keyword", { link = "TSKeyword" })
-  hi(0, "@keyword.function", { link = "TSKeywordFunction" })
-  hi(0, "@keyword.operator", { link = "TSKeywordOperator" })
-  hi(0, "@keyword.return", { link = "TSKeyword" })
-  hi(0, "@label", { link = "TSLabel" })
-  hi(0, "@method", { link = "TSMethod" })
-  hi(0, "@method.call", { link = "TSMethodCall" })
-  hi(0, "@modifier", { link = "Identifier" })
-  hi(0, "@namespace", { link = "TSNamespace" })
-  hi(0, "@none", { link = "TSNone" })
-  hi(0, "@number", { link = "TSNumber" })
-  hi(0, "@operator", { link = "TSOperator" })
-  hi(0, "@parameter", { link = "TSParameter" })
-  hi(0, "@property", { link = "TSProperty" })
-  hi(0, "@punctuation.bracket", { link = "TSPunctBracket" })
-  hi(0, "@punctuation.delimiter", { link = "TSPunctDelimiter" })
-  hi(0, "@punctuation.special", { link = "TSPunctSpecial" })
-  hi(0, "@regexp", { link = "TSStringRegex" })
-  hi(0, "@repeat", { link = "TSRepeat" })
-  hi(0, "@string", { link = "TSString" })
-  hi(0, "@string.escape", { link = "TSStringEscape" })
-  hi(0, "@string.regex", { link = "TSStringRegex" })
-  hi(0, "@string.special", { link = "SpecialChar" })
-  hi(0, "@struct", { link = "TSType" })
-  hi(0, "@symbol", { link = "TSSymbol" })
-  hi(0, "@tag", { link = "TSTag" })
-  hi(0, "@tag.attribute", { link = "TSAttribute" })
-  hi(0, "@tag.delimiter", { link = "TSTagDelimiter" })
-  hi(0, "@text", { link = "TSText" })
-  hi(0, "@text.danger", { link = "DiagnosticError" })
-  hi(0, "@text.emphasis", { link = "TSEmphasis" })
-  hi(0, "@text.environment", { link = "Macro" })
-  hi(0, "@text.environment.name", { link = "Type" })
-  hi(0, "@text.literal", { link = "TSLiteral" })
-  hi(0, "@text.math", { link = "Number" })
-  hi(0, "@text.note", { link = "Tag" })
-  hi(0, "@text.reference", { link = "TSParameterReference" })
-  hi(0, "@text.strike", { link = "TSStrike" })
-  hi(0, "@text.strong", { link = "TSStrong" })
-  hi(0, "@text.title", { link = "TSTitle" })
-  hi(0, "@text.todo", { link = "Todo" })
-  hi(0, "@text.underline", { link = "TSUnderline" })
-  hi(0, "@text.uri", { link = "TSURI" })
-  hi(0, "@text.warning", { link = "DiagnosticWarn" })
-  hi(0, "@type", { link = "TSType" })
-  hi(0, "@type.builtin", { link = "TSTypeBuiltin" })
-  hi(0, "@type.definition", { link = "TSTypeDefinition" })
-  hi(0, "@type.qualifier", { link = "TSType" })
-  hi(0, "@typeParameter", { link = "Type" })
-  hi(0, "@variable", { link = "TSVariable" })
-  hi(0, "@variable.builtin", { link = "TSVariableBuiltin" })
-  hi(0, "@lsp.type.namespace", { link = "TSNamespace" })
-  hi(0, "@lsp.type.variable", {})
-  hi(0, "@lsp.type.field", { link = "TSField" })
-  hi(0, "@lsp.type.parameter", { link = "TSVariable" })
-  hi(0, "@lsp.type.type", {})
-  -- hi(0, "@lsp.type.field", {})
-  -- hi(0, "@lsp.type.function", {})
-  -- hi(0, "@lsp.type.method", {})
-  -- hi(0, "@lsp.type.comment", {})
-  -- hi(0, "@lsp.typemod.variable.defaultLibrary", { link = "TSKeyword" })
-  -- hi(0, "@lsp.mod.defaultLibrary.go", { link = "TSKeyword" })
-  hi(0, "@lsp.type.property", {})
-  hi(0, "yamlBlockMappingKey", { link = "TSProperty" })
-  hi(0, "gotplAction", { link = "TSString" })
+  -- ============================================================================
+  -- BASE EDITOR COLORS
+  -- ============================================================================
+  hi(0, "Normal", { fg = colors.fg, bg = colors.bg })
+  hi(0, "NormalFloat", { fg = colors.fg, bg = colors.ui_bg })
+  hi(0, "NormalNC", { fg = colors.fg, bg = colors.bg })
+  hi(0, "FloatBorder", { fg = colors.ui_border, bg = colors.ui_bg })
+  hi(0, "FloatTitle", { fg = colors.fg, bg = colors.ui_bg, bold = true })
 
-  hi(0, "Bold", { bold = true })
-  hi(0, "Boolean", { fg = colors.dark_apricot })
-  hi(0, "Character", { fg = colors.bright_red })
+  -- Cursor
+  hi(0, "Cursor", { fg = colors.bg, bg = colors.cursor })
+  hi(0, "CursorLine", { bg = colors.line_highlight })
+  hi(0, "CursorLineNr", { fg = colors.fg, bg = colors.line_highlight, bold = true })
+  hi(0, "CursorColumn", { bg = colors.line_highlight })
+  hi(0, "lCursor", { link = "Cursor" })
+  hi(0, "iCursor", { link = "Cursor" })
+  hi(0, "TermCursor", { link = "Cursor" })
+  hi(0, "TermCursorNC", { link = "Cursor" })
 
-  -- nvim-cmp
-  hi(0, "Pmenu", { bg = colors.battleship_gray, ctermbg = 13, ctermfg = 0 })
-  hi(0, "PmenuSel", { bg = colors.ochre, ctermbg = 0, ctermfg = 242 })
-  hi(0, "CmpDocumentation", { fg = colors.silver_chalice })
-  hi(0, "CmpDocumentationBorder", { fg = colors.silver_chalice })
-  hi(0, "CmpItemAbbr", { fg = colors.silver_chalice })
-  hi(0, "CmpItemAbbrDefault", { fg = colors.silver_chalice })
-  hi(0, "CmpItemAbbrDeprecated", { fg = colors.gray_asparagus, strikethrough = true })
-  hi(0, "CmpItemAbbrDeprecatedDefault", { fg = colors.gray_asparagus })
-  hi(0, "CmpItemAbbrMatch", { fg = colors.powder_blue })
-  hi(0, "CmpItemAbbrMatchDefault", { fg = colors.silver_chalice })
-  hi(0, "CmpItemAbbrMatchFuzzy", { fg = colors.powder_blue })
-  hi(0, "CmpItemAbbrMatchFuzzyDefault", { fg = colors.silver_chalice })
-  hi(0, "CmpItemKindClass", { fg = colors.battleship_gray })
-  hi(0, "CmpItemKindClassDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindColorDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindConstant", { fg = colors.dark_apricot })
-  hi(0, "CmpItemKindConstantDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindConstructor", { fg = colors.powder_blue })
-  hi(0, "CmpItemKindConstructorDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindDefault", { fg = colors.maya_blue })
-  hi(0, "CmpItemKindEnum", { fg = colors.battleship_gray })
-  hi(0, "CmpItemKindEnumDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindEnumMember", { fg = colors.battleship_gray })
-  hi(0, "CmpItemKindEnumMemberDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindEvent", { fg = colors.battleship_gray })
-  hi(0, "CmpItemKindEventDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindField", { fg = colors.bright_red })
-  hi(0, "CmpItemKindFieldDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindFileDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindFolderDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindFunction", { fg = colors.powder_blue })
-  hi(0, "CmpItemKindFunctionDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindInterface", { fg = colors.battleship_gray })
-  hi(0, "CmpItemKindInterfaceDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindKeyword", { fg = colors.dark_khaki })
-  hi(0, "CmpItemKindKeywordDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindMethod", { fg = colors.powder_blue })
-  hi(0, "CmpItemKindMethodDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindModule", { fg = colors.silver_chalice })
-  hi(0, "CmpItemKindModuleDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindOperator", { fg = colors.silver_chalice })
-  hi(0, "CmpItemKindOperatorDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindProperty", { fg = colors.bright_red })
-  hi(0, "CmpItemKindPropertyDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindReference", { fg = colors.bright_red })
-  hi(0, "CmpItemKindReferenceDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindSnippet", { fg = colors.cadet_grey })
-  hi(0, "CmpItemKindSnippetDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindStruct", { fg = colors.battleship_gray })
-  hi(0, "CmpItemKindStructDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindTextDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindTypeParameter", { fg = colors.battleship_gray })
-  hi(0, "CmpItemKindTypeParameterDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindUnit", { fg = colors.battleship_gray })
-  hi(0, "CmpItemKindUnitDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindValue", { fg = colors.dark_apricot })
-  hi(0, "CmpItemKindValueDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemKindVariable", { fg = colors.bright_red })
-  hi(0, "CmpItemKindVariableDefault", { link = "CmpItemKind" })
-  hi(0, "CmpItemMenu", { fg = colors.cadet_grey })
-  hi(0, "CmpItemMenuDefault", { fg = colors.silver_chalice })
-  hi(0, "ColorColumn", { bg = colors.gray_asparagus, ctermbg = 1 })
-  hi(0, "Comment", { ctermfg = 14 })
-  hi(0, "Conceal", { ctermbg = 242, ctermfg = 7, fg = colors.powder_blue })
-  hi(0, "Conditional", { fg = colors.dark_khaki })
+  -- Line numbers
+  hi(0, "LineNr", { fg = colors.gutter_fg, bg = colors.gutter_bg })
+  hi(0, "SignColumn", { fg = colors.gutter_fg, bg = colors.gutter_bg })
+  hi(0, "FoldColumn", { fg = colors.gutter_fg, bg = colors.gutter_bg })
+  hi(0, "Folded", { fg = colors.gutter_fg, bg = colors.line_highlight })
 
-  -- conflict-marker.vim
-  hi(0, "ConflictMarkerBegin", { bg = colors.viridian_green })
-  hi(0, "ConflictMarkerCommonAncestorsHunk", { bg = colors.purple })
-  hi(0, "ConflictMarkerEnd", { bg = colors.little_boy_blue })
-  hi(0, "ConflictMarkerOurs", { bg = colors.myrtle })
-  hi(0, "ConflictMarkerTheirs", { bg = colors.dark_slate_gray })
-  hi(0, "Constant", { ctermfg = 13, fg = colors.dark_apricot })
+  -- Visual selection
+  hi(0, "Visual", { bg = colors.selection })
+  hi(0, "VisualNOS", { bg = colors.selection })
 
-  -- cursor
-  hi(0, "Cursor", { bg = colors.light_gray, fg = colors.gray_asparagus })
-  hi(0, "CursorColumn", { bg = colors.gray_asparagus, ctermbg = 242 })
-  hi(0, "CursorLine", { bg = colors.gray_asparagus })
-  hi(0, "CursorLineNr", { bg = colors.gray_asparagus, bold = true, ctermfg = 11, fg = colors.cadet_grey })
+  -- Search
+  hi(0, "Search", { bg = colors.search })
+  hi(0, "IncSearch", { bg = colors.match, fg = colors.white })
+  hi(0, "CurSearch", { link = "IncSearch" })
+  hi(0, "Substitute", { link = "IncSearch" })
 
-  -- dap.nvim
-  hi(0, "DapUIBreakpointsCurrentLine", { bold = true, fg = colors.electric_lime })
-  hi(0, "DapUIBreakpointsDisabledLine", { fg = colors.gunmetal })
-  hi(0, "DapUIBreakpointsInfo", { fg = colors.electric_lime })
-  hi(0, "DapUIBreakpointsPath", { fg = colors.electric_cyan })
-  hi(0, "DapUIDecoration", { fg = colors.electric_cyan })
-  hi(0, "DapUIFloatBorder", { fg = colors.electric_cyan })
-  hi(0, "DapUILineNumber", { fg = colors.electric_cyan })
-  hi(0, "DapUIModifiedValue", { bold = true, fg = colors.electric_cyan })
-  hi(0, "DapUIPlayPause", { fg = colors.electric_lime })
-  hi(0, "DapUIPlayPauseNC", { fg = colors.electric_lime })
-  hi(0, "DapUIRestart", { fg = colors.electric_lime })
-  hi(0, "DapUIRestartNC", { fg = colors.electric_lime })
-  hi(0, "DapUIScope", { fg = colors.electric_cyan })
-  hi(0, "DapUISource", { fg = colors.purple })
-  hi(0, "DapUIStepBack", { fg = colors.electric_cyan })
-  hi(0, "DapUIStepBackNC", { fg = colors.electric_cyan })
-  hi(0, "DapUIStepInto", { fg = colors.electric_cyan })
-  hi(0, "DapUIStepIntoNC", { fg = colors.electric_cyan })
-  hi(0, "DapUIStepOut", { fg = colors.electric_cyan })
-  hi(0, "DapUIStepOutNC", { fg = colors.electric_cyan })
-  hi(0, "DapUIStepOver", { fg = colors.electric_cyan })
-  hi(0, "DapUIStepOverNC", { fg = colors.electric_cyan })
-  hi(0, "DapUIStop", { fg = colors.fashion_fuchsia })
-  hi(0, "DapUIStopNC", { fg = colors.fashion_fuchsia })
-  hi(0, "DapUIStoppedThread", { fg = colors.electric_cyan })
-  hi(0, "DapUIThread", { fg = colors.electric_lime })
-  hi(0, "DapUIType", { fg = colors.purple })
-  hi(0, "DapUIUnavailable", { fg = colors.gunmetal })
-  hi(0, "DapUIUnavailableNC", { fg = colors.gunmetal })
-  hi(0, "DapUIWatchesEmpty", { fg = colors.fashion_fuchsia })
-  hi(0, "DapUIWatchesError", { fg = colors.fashion_fuchsia })
-  hi(0, "DapUIWatchesValue", { fg = colors.electric_lime })
-  hi(0, "Debug", { fg = colors.bright_red })
-  hi(0, "Define", { fg = colors.dark_khaki })
-  hi(0, "DefinitionArrow", { fg = colors.light_crimson })
-  hi(0, "DefinitionBorder", { fg = colors.powder_blue })
-  hi(0, "DefinitionFile", { bg = colors.rhythm })
-  hi(0, "Definitions", { bold = true, fg = colors.purple })
-  hi(0, "DefinitionsIcon", { fg = colors.yellow })
-  hi(0, "Delimiter", { fg = colors.leather_brown })
-  hi(0, "DiagnosticError", { ctermfg = 1, fg = colors.bright_red })
-  hi(0, "DiagnosticHint", { ctermfg = 7, fg = colors.maya_blue })
-  hi(0, "DiagnosticInfo", { ctermfg = 4, fg = colors.silver_chalice })
-  hi(0, "DiagnosticLineCol", { fg = colors.slate_gray })
-  hi(0, "DiagnosticMap", { fg = colors.purple })
-  hi(0, "DiagnosticQuickFix", { bold = true, fg = colors.malachite })
-  hi(0, "DiagnosticUnderlineError", { sp = colors.bright_red, undercurl = true })
-  hi(0, "DiagnosticUnderlineHint", { sp = colors.maya_blue, undercurl = true })
-  hi(0, "DiagnosticUnderlineInformation", { sp = colors.leather_brown, undercurl = true })
-  hi(0, "DiagnosticUnderlineWarn", { sp = colors.dark_khaki, undercurl = true })
-  hi(0, "DiagnosticUnderlineWarning", { sp = colors.dark_khaki, undercurl = true })
-  hi(0, "DiagnosticWarn", { ctermfg = 3, fg = colors.dark_khaki })
-  hi(0, "DiffAdd", { ctermbg = 4, fg = colors.lemon_glacier })
-  hi(0, "DiffAdded", { fg = colors.lemon_glacier })
-  hi(0, "DiffChange", { ctermbg = 5, fg = colors.gray_asparagus })
-  hi(0, "DiffDelete", { bold = true, ctermbg = 6, ctermfg = 12, fg = colors.bright_red })
-  hi(0, "DiffFile", { fg = colors.bright_red })
-  hi(0, "DiffLine", { fg = colors.powder_blue })
-  hi(0, "DiffNewFile", { fg = colors.lemon_glacier })
-  hi(0, "DiffRemoved", { fg = colors.bright_red })
-  hi(0, "DiffText", { bold = true, ctermbg = 9, fg = colors.powder_blue })
-  hi(0, "Directory", { ctermfg = 159, fg = colors.powder_blue })
-  hi(0, "NonText", { ctermfg = 159, fg = colors.powder_blue })
-  hi(0, "NeoTreeDirectoryIcon", { ctermfg = 159, fg = colors.ochre })
-  hi(0, "SnacksPickerGitStatusUntracked", { fg = colors.lemon_glacier })
-  hi(0, "SnacksPickerPathIgnored", { fg = colors.deep_magenta })
-  hi(0, "NeoTreeGitAdded", { fg = colors.lemon_glacier })
-  hi(0, "Error", { bg = colors.bright_red, ctermbg = 9, ctermfg = 15, fg = colors.gray_asparagus })
-  hi(0, "ErrorMsg", { ctermbg = 1, ctermfg = 15, fg = colors.bright_red })
-  hi(0, "Exception", { fg = colors.bright_red })
-  hi(0, "EyelinerDimmed", { fg = colors.gray_asparagus })
-  hi(0, "EyelinerPrimary", { fg = colors.dark_apricot })
-  hi(0, "EyelinerSecondary", { fg = colors.dark_khaki })
-  hi(0, "FinderParam", { bg = colors.raisin_black, bold = true, fg = colors.purple })
-  hi(0, "FinderSpinner", { bold = true, fg = colors.purple })
-  hi(0, "FinderSpinnerBorder", { fg = colors.celestial_blue })
-  hi(0, "FinderSpinnerTitle", { bold = true, fg = colors.purple })
-  hi(0, "FinderVirtText", { fg = colors.dark_coral })
-  hi(0, "Float", { fg = colors.dark_apricot })
-  hi(0, "FloatBorder", { fg = colors.silver_chalice })
-  hi(0, "FocusedSymbol", { bg = colors.gray_asparagus, fg = colors.lemon_glacier })
-  hi(0, "FoldColumn", { ctermbg = 242 })
-  hi(0, "Folded", { bg = colors.gray_asparagus, ctermbg = 242 })
-  hi(0, "Function", { fg = colors.atomic_tangerine })
-  hi(0, "GitGutterAdd", { bg = colors.gray_asparagus, fg = colors.lemon_glacier })
-  hi(0, "GitGutterChange", { bg = colors.gray_asparagus, fg = colors.powder_blue })
-  hi(0, "GitGutterChangeDelete", { bg = colors.gray_asparagus, fg = colors.dark_khaki })
-  hi(0, "GitGutterDelete", { bg = colors.gray_asparagus, fg = colors.bright_red })
-  hi(0, "GitSignsStagedAdd", { bg = colors.gray_asparagus, fg = "#64682e" })
-  hi(0, "GitSignsStagedAddLn", { bg = colors.gray_asparagus, fg = "#64682e" })
-  hi(0, "GitSignsStagedAddNr", { bg = colors.gray_asparagus, fg = "#64682e" })
-  hi(0, "GitSignsStagedChange", { bg = colors.gray_asparagus, fg = colors.cadet })
-  hi(0, "GitSignsStagedChangeLn", { bg = colors.gray_asparagus, fg = colors.jet })
-  hi(0, "GitSignsStagedChangeNr", { bg = colors.gray_asparagus, fg = colors.cadet })
-  hi(0, "GitSignsStagedChangedelete", { bg = colors.gray_asparagus, fg = colors.cadet })
-  hi(0, "GitSignsStagedChangedeleteLn", { bg = colors.gray_asparagus, fg = colors.jet })
-  hi(0, "GitSignsStagedChangedeleteNr", { bg = colors.gray_asparagus, fg = colors.cadet })
-  hi(0, "GitSignsStagedDelete", { bg = colors.gray_asparagus, fg = colors.sangria })
-  hi(0, "GitSignsStagedDeleteNr", { bg = colors.gray_asparagus, fg = colors.sangria })
-  hi(0, "GitSignsStagedTopdelete", { bg = colors.gray_asparagus, fg = colors.sangria })
-  hi(0, "GitSignsStagedTopdeleteNr", { bg = colors.gray_asparagus, fg = colors.sangria })
-  hi(0, "HopNextKey", { bold = true, ctermfg = 198, fg = colors.fashion_fuchsia })
-  hi(0, "HopNextKey1", { bold = true, ctermfg = 45, fg = colors.blue_lagoon })
-  hi(0, "HopNextKey2", { ctermfg = 33, fg = colors.celestial_blue })
-  hi(0, "HopPreview", { link = "IncSearch" })
-  hi(0, "HopUnmatched", { ctermfg = 242, fg = colors.davys_grey, sp = colors.davys_grey })
-  hi(0, "Identifier", { ctermfg = 14, fg = colors.bright_red })
-  hi(0, "Ignore", { ctermfg = 0, fg = colors.gray_asparagus })
-  hi(0, "Implements", { bold = true, fg = colors.purple })
-  hi(0, "ImplementsIcon", { fg = colors.yellow })
-  hi(0, "IncSearch", { bg = colors.dark_apricot, fg = colors.gray_asparagus })
-  hi(0, "Include", { fg = colors.ochre })
-  hi(0, "IndentBlanklineChar", { fg = colors.gunmetal, nocombine = true })
-  hi(0, "IndentBlanklineContextChar", { fg = colors.cadet_grey, nocombine = true })
-  hi(0, "IndentBlanklineContextStart", { sp = colors.battleship_gray, underline = true })
-  hi(0, "IndentBlanklineSpaceChar", { ctermfg = 12, fg = colors.gray_asparagus, nocombine = true })
-  hi(0, "IndentBlanklineSpaceCharBlankline", { ctermfg = 12, fg = colors.gray_asparagus, nocombine = true })
-  hi(0, "LSOutlinePreviewBorder", { fg = colors.malachite })
-  hi(0, "Label", { fg = colors.battleship_gray })
-  hi(0, "LineNr", { ctermfg = 11, fg = colors.cadet_grey })
-  hi(0, "LspDiagnosticsDefaultError", { link = "DiagnosticError" })
-  hi(0, "LspDiagnosticsDefaultHint", { link = "DiagnosticHint" })
-  hi(0, "LspDiagnosticsDefaultInformation", { link = "DiagnosticInfo" })
-  hi(0, "LspDiagnosticsDefaultWarning", { link = "DiagnosticWarn" })
-  hi(0, "LspDiagnosticsUnderlineError", { link = "DiagnosticUnderlineError" })
-  hi(0, "LspDiagnosticsUnderlineHint", { link = "DiagnosticUnderlineHint" })
-  hi(0, "LspDiagnosticsUnderlineInformation", { link = "DiagnosticUnderlineInformation" })
-  hi(0, "LspDiagnosticsUnderlineWarning", { link = "DiagnosticUnderlineWarning" })
-  hi(0, "LspReferenceRead", { sp = colors.cadet_grey, underline = true })
-  hi(0, "LspReferenceText", { sp = colors.cadet_grey, underline = true })
-  hi(0, "LspReferenceWrite", { sp = colors.cadet_grey, underline = true })
-  hi(0, "LspSagaAutoPreview", { fg = colors.celestial_blue })
-  hi(0, "LspSagaCodeActionBorder", { fg = colors.purple })
-  hi(0, "LspSagaCodeActionContent", { bold = true, fg = colors.granny_smith_apple })
-  hi(0, "LspSagaCodeActionTitle", { bold = true, fg = colors.ochre })
-  hi(0, "LspSagaDiagnosticBorder", { fg = colors.purple })
-  hi(0, "LspSagaDiagnosticHeader", { fg = colors.granny_smith_apple })
-  hi(0, "LspSagaFinderSelection", { bold = true, fg = colors.electric_lime })
-  hi(0, "LspSagaHoverBorder", { fg = colors.atomic_tangerine })
-  hi(0, "LspSagaLspFinderBorder", { fg = colors.celestial_blue })
-  hi(0, "LspSagaRenameBorder", { fg = colors.blue_lagoon })
-  hi(0, "LspSagaSignatureHelpBorder", { fg = colors.granny_smith_apple })
-  hi(0, "Macro", { fg = colors.bright_red })
-  hi(0, "MatchParen", { fg = colors.blue_lagoon, bold = true })
-  hi(0, "ModeMsg", { bold = true, fg = colors.lemon_glacier })
-  hi(0, "MoreMsg", { bold = true, ctermfg = 121, fg = colors.lemon_glacier })
-  hi(0, "NERDTreeFile", { fg = colors.silver_chalice })
-  hi(0, "NERDTreeCWD", { fg = colors.silver_chalice })
-  hi(0, "NERDTreeGitStatusIgnored", { ctermfg = 81, fg = colors.gray_asparagus })
-  hi(0, "NERDTreeGitStatusModified", { ctermfg = 224, fg = colors.maya_blue })
-  hi(0, "NERDTreeGitStatusRenamed", { ctermfg = 225, fg = colors.powder_blue })
-  hi(0, "NERDTreeGitStatusUntracked", { ctermfg = 14, fg = colors.gray_asparagus })
-  hi(0, "NonText", { bold = true, ctermfg = 12, fg = colors.gray_asparagus })
-  hi(0, "Normal", { bg = colors.jet, fg = colors.silver_chalice })
-  hi(0, "NormalFloat", { fg = colors.silver_chalice })
-  hi(0, "NormalNC", { fg = colors.silver_chalice })
-  hi(0, "NotifyDEBUGBody", { link = "Normal" })
-  hi(0, "NotifyDEBUGBorder", { fg = colors.maya_blue })
-  hi(0, "NotifyDEBUGIcon", { fg = colors.maya_blue })
-  hi(0, "NotifyDEBUGTitle", { fg = colors.maya_blue })
-  hi(0, "NotifyERRORBody", { link = "Normal" })
-  hi(0, "NotifyERRORBorder", { fg = colors.bright_red })
-  hi(0, "NotifyERRORIcon", { fg = colors.bright_red })
-  hi(0, "NotifyERRORTitle", { fg = colors.bright_red })
-  hi(0, "NotifyINFOBody", { link = "Normal" })
-  hi(0, "NotifyINFOBorder", { fg = colors.silver_chalice })
-  hi(0, "NotifyINFOIcon", { fg = colors.silver_chalice })
-  hi(0, "NotifyINFOTitle", { fg = colors.silver_chalice })
-  hi(0, "NotifyTRACEBody", { link = "Normal" })
-  hi(0, "NotifyTRACEBorder", { fg = colors.maya_blue })
-  hi(0, "NotifyTRACEIcon", { fg = colors.maya_blue })
-  hi(0, "NotifyTRACETitle", { fg = colors.maya_blue })
-  hi(0, "NotifyWARNBody", { link = "Normal" })
-  hi(0, "NotifyWARNBorder", { fg = colors.dark_khaki })
-  hi(0, "NotifyWARNIcon", { fg = colors.dark_khaki })
-  hi(0, "NotifyWARNTitle", { fg = colors.dark_khaki })
-  hi(0, "Number", { fg = colors.dark_apricot })
-  hi(0, "NvimInternalError", { bg = colors.bright_red, ctermbg = 9, ctermfg = 9, fg = colors.gray_asparagus })
-  hi(0, "Operator", { fg = colors.silver_chalice })
-  hi(0, "OutlineDetail", { fg = colors.slate_gray })
-  hi(0, "OutlineFoldPrefix", { fg = colors.dark_lava })
-  hi(0, "OutlineIndentEvn", { fg = colors.deep_magenta })
-  hi(0, "OutlineIndentOdd", { fg = colors.ochre })
-  hi(0, "PreProc", { ctermfg = 81, fg = colors.battleship_gray })
-  hi(0, "Question", { bold = true, ctermfg = 121, fg = colors.powder_blue })
-  hi(0, "QuickFixLine", { bg = colors.gray_asparagus })
-  hi(0, "References", { bold = true, fg = colors.purple })
-  hi(0, "ReferencesIcon", { fg = colors.yellow })
-  hi(0, "Repeat", { fg = colors.battleship_gray })
-  hi(0, "SagaShadow", { fg = colors.black })
-  hi(0, "ScrollbarCursor", { ctermfg = 0, fg = colors.silver_chalice })
-  hi(0, "ScrollbarCursorHandle", { bg = colors.gray_asparagus, ctermbg = 15, ctermfg = 0, fg = colors.silver_chalice })
-  hi(0, "ScrollbarError", { ctermfg = 0, fg = colors.bright_red })
-  hi(0, "ScrollbarErrorHandle", { bg = colors.gray_asparagus, ctermbg = 15, ctermfg = 0, fg = colors.bright_red })
-  hi(0, "ScrollbarGitAdd", { ctermfg = 0, fg = colors.green })
-  hi(0, "ScrollbarGitAddHandle", { bg = colors.gray_asparagus, ctermbg = 15, ctermfg = 0, fg = colors.green })
-  hi(0, "ScrollbarGitChange", { ctermfg = 0, fg = colors.yellow })
-  hi(0, "ScrollbarGitChangeHandle", { bg = colors.gray_asparagus, ctermbg = 15, ctermfg = 0, fg = colors.yellow })
-  hi(0, "ScrollbarGitDelete", { ctermfg = 0, fg = colors.bright_red })
-  hi(0, "ScrollbarGitDeleteHandle", { bg = colors.gray_asparagus, ctermbg = 15, ctermfg = 0, fg = colors.bright_red })
-  hi(0, "ScrollbarHandle", { bg = colors.gray_asparagus, ctermbg = 15 })
-  hi(0, "ScrollbarHint", { ctermfg = 0, fg = colors.maya_blue })
-  hi(0, "ScrollbarHintHandle", { bg = colors.gray_asparagus, ctermbg = 15, ctermfg = 0, fg = colors.maya_blue })
-  hi(0, "ScrollbarInfo", { ctermfg = 0, fg = colors.silver_chalice })
-  hi(0, "ScrollbarInfoHandle", { bg = colors.gray_asparagus, ctermbg = 15, ctermfg = 0, fg = colors.silver_chalice })
-  hi(0, "ScrollbarMisc", { ctermfg = 0, fg = colors.silver_chalice })
-  hi(0, "ScrollbarMiscHandle", { bg = colors.gray_asparagus, ctermbg = 15, ctermfg = 0, fg = colors.silver_chalice })
-  hi(0, "ScrollbarSearch", { ctermfg = 0, fg = colors.gray_asparagus })
-  hi(0, "ScrollbarSearchHandle", { bg = colors.gray_asparagus, ctermbg = 15, ctermfg = 0, fg = colors.gray_asparagus })
-  hi(0, "ScrollbarWarn", { ctermfg = 0, fg = colors.dark_khaki })
-  hi(0, "ScrollbarWarnHandle", { bg = colors.gray_asparagus, ctermbg = 15, ctermfg = 0, fg = colors.dark_khaki })
-  hi(0, "Search", { bg = colors.battleship_gray, ctermbg = 11, ctermfg = 0, fg = colors.gray_asparagus })
-  hi(0, "SignColumn", { ctermbg = 242, ctermfg = 14, fg = colors.cadet_grey })
-  hi(0, "SniprunFloatingWinErr", { ctermfg = 1, fg = colors.sangria })
-  hi(0, "SniprunFloatingWinOk", { ctermfg = 14, fg = colors.electric_cyan })
-  hi(0, "SniprunVirtualTextErr", { bg = colors.sangria, ctermbg = 1, fg = colors.black })
-  hi(0, "SniprunVirtualTextOk", { bg = colors.electric_cyan, ctermbg = 14, fg = colors.black })
-  hi(0, "Special", { ctermfg = 224, fg = colors.maya_blue })
-  hi(0, "SpecialChar", { fg = colors.leather_brown })
-  hi(0, "SpecialKey", { ctermfg = 81, fg = colors.gray_asparagus })
-  hi(0, "SpellBad", { ctermbg = 9, sp = colors.bright_red, undercurl = true })
-  hi(0, "SpellCap", { ctermbg = 12, sp = colors.powder_blue, undercurl = true })
-  hi(0, "SpellLocal", { ctermbg = 14, sp = colors.maya_blue, undercurl = true })
-  hi(0, "SpellRare", { ctermbg = 13, sp = colors.dark_khaki, undercurl = true })
-  hi(0, "Statement", { bold = true, ctermfg = 11, fg = colors.bright_red })
-  hi(0, "StatusLine", { bg = colors.gunmetal, fg = colors.silver_chalice })
-  hi(0, "StatusLineNC", { bg = colors.gray_asparagus, fg = colors.cadet_grey })
-  hi(0, "StorageClass", { fg = colors.battleship_gray })
-  hi(0, "String", { fg = colors.lemon_glacier })
-  hi(0, "Structure", { fg = colors.dark_khaki })
-  hi(0, "Substitute", { bg = colors.battleship_gray, fg = colors.gray_asparagus })
-  hi(0, "SymbolsOutlineConnector", { fg = colors.gray_asparagus })
-  hi(0, "TSAnnotation", { fg = colors.leather_brown })
-  hi(0, "TSAttribute", { fg = colors.battleship_gray })
-  hi(0, "TSBoolean", { fg = colors.ochre })
-  hi(0, "TSCharacter", { fg = colors.bright_red })
-  hi(0, "TSComment", { fg = colors.slate_gray, italic = true })
-  hi(0, "GitSignsCurrentLineBlame", { fg = colors.slate_gray, italic = true })
-  hi(0, "TSConditional", { fg = colors.ochre })
-  hi(0, "TSConstBuiltin", { fg = colors.dark_apricot, italic = true })
-  hi(0, "TSMethodCall", { fg = colors.atomic_tangerine })
-  hi(0, "TSFunctionCall", { fg = colors.atomic_tangerine })
-  hi(0, "TSConstMacro", { fg = colors.bright_red })
-  hi(0, "TSConstant", { fg = colors.purple })
-  hi(0, "TSConstructor", { fg = colors.atomic_tangerine })
-  hi(0, "TSCurrentScope", { bold = true })
-  hi(0, "TSDefinition", { sp = colors.cadet_grey, underline = true })
-  hi(0, "TSDefinitionUsage", { sp = colors.cadet_grey, underline = true })
-  hi(0, "TSEmphasis", { fg = colors.dark_apricot, italic = true })
-  hi(0, "TSError", { fg = colors.bright_red })
-  hi(0, "TSException", { fg = colors.bright_red })
-  hi(0, "TSField", { fg = colors.purple })
-  hi(0, "TSFloat", { fg = colors.dark_apricot })
-  hi(0, "TSFuncBuiltin", { link = "TSFunction", bold = true })
-  hi(0, "TSFuncMacro", { fg = colors.bright_red })
-  hi(0, "TSFunction", { fg = colors.atomic_tangerine })
-  hi(0, "TSInclude", { fg = colors.ochre })
-  hi(0, "TSKeyword", { fg = colors.ochre })
-  hi(0, "TSKeywordFunction", { fg = colors.ochre })
-  hi(0, "TSKeywordOperator", { fg = colors.dark_khaki })
-  hi(0, "TSLabel", { fg = colors.purple })
-  hi(0, "TSLiteral", { fg = colors.dark_apricot })
-  hi(0, "TSMethod", { fg = colors.atomic_tangerine })
-  hi(0, "TSNamespace", { fg = colors.light_gray })
-  hi(0, "TSNone", { fg = colors.silver_chalice })
-  hi(0, "TSNumber", { fg = colors.powder_blue })
-  hi(0, "TSConstantBuiltin", { fg = colors.ochre, bold = true })
-  hi(0, "TSOperator", { fg = colors.silver_chalice })
-  hi(0, "TSParameter", { fg = colors.silver_chalice })
-  hi(0, "TSParameterReference", { fg = colors.silver_chalice })
-  hi(0, "TSProperty", { fg = colors.purple })
-  hi(0, "TSPunctBracket", { fg = colors.silver_chalice })
-  hi(0, "TSPunctDelimiter", { fg = colors.silver_chalice })
-  hi(0, "TSPunctSpecial", { fg = colors.silver_chalice })
-  hi(0, "TSStrike", { fg = colors.gray_asparagus, strikethrough = true })
-  hi(0, "TSString", { fg = colors.camouflage_green })
-  hi(0, "TSStringEscape", { fg = colors.maya_blue })
-  hi(0, "TSStringRegex", { fg = colors.maya_blue })
-  hi(0, "TSStrong", { bold = true })
-  hi(0, "TSSymbol", { fg = colors.lemon_glacier })
-  hi(0, "TSTag", { fg = colors.battleship_gray })
-  hi(0, "TSTagDelimiter", { fg = colors.leather_brown })
-  hi(0, "TSText", { fg = colors.silver_chalice })
-  hi(0, "TSTitle", { fg = colors.powder_blue })
-  hi(0, "TSType", { fg = colors.little_boy_blue })
+  -- Messages and prompts
+  hi(0, "ErrorMsg", { fg = colors.error, bold = true })
+  hi(0, "WarningMsg", { fg = colors.warning })
+  hi(0, "ModeMsg", { fg = colors.fg, bold = true })
+  hi(0, "MoreMsg", { fg = colors.string, bold = true })
+  hi(0, "Question", { fg = colors.string, bold = true })
+  hi(0, "Title", { fg = colors.function_name, bold = true })
 
-  hi(0, "TSTypeDefinition", { fg = colors.silver_chalice })
-  hi(0, "TSTypeBuiltin", { fg = colors.ochre, bold = true })
-  hi(0, "TSURI", { fg = colors.dark_apricot, underline = true })
-  hi(0, "TSUnderline", { fg = colors.gray_asparagus, underline = true })
-  hi(0, "TSVariable", { fg = colors.silver_chalice })
-  hi(0, "TSVariableBuiltin", { fg = colors.ochre, bold = true })
-  hi(0, "TabLine", { bg = colors.gray_asparagus, ctermbg = 242, ctermfg = 15, fg = colors.gray_asparagus })
-  hi(0, "TabLineFill", { bg = colors.gray_asparagus, fg = colors.gray_asparagus })
-  hi(0, "TabLineSel", { bg = colors.gray_asparagus, fg = colors.lemon_glacier })
-  hi(0, "Tag", { fg = colors.battleship_gray })
-  hi(0, "TargetFileName", { fg = colors.light_gray })
-  hi(0, "protoType", { link = "TSTypeBuiltin" })
-  hi(0, "protoRepeat", { link = "TSTypeBuiltin" })
-  hi(0, "protoTypedef", { link = "TSTypeDefinition" })
-  -- telescope
-  hi(0, "TelescopeBorder", { bg = colors.wite, fg = colors.white })
-  hi(0, "TelescopeNormal", { bg = colors.jet, fg = colors.silver_chalice })
-  hi(0, "TelescopePreviewLine", { bg = colors.gunmetal })
-  hi(0, "TelescopePreviewTitle", { bg = colors.ochre, fg = colors.jet })
-  hi(0, "TelescopePromptBorder", { bg = colors.jet, fg = colors.white })
-  hi(0, "TelescopePromptNormal", { bg = colors.jet, fg = colors.silver_chalice })
-  hi(0, "TelescopePromptPrefix", { bg = colors.jet, fg = colors.bright_red })
-  hi(0, "TelescopePromptTitle", { bg = colors.ochre, fg = colors.jet })
-  hi(0, "TelescopeResultsTitle", { bg = colors.ochre, fg = colors.jet })
-  hi(0, "TelescopeSelection", { bg = colors.gunmetal })
-  hi(0, "TermCursor", { bg = colors.light_gray, fg = colors.gray_asparagus })
-  hi(0, "TermCursorNC", { bg = colors.light_gray, fg = colors.gray_asparagus })
-  hi(0, "Title", { ctermfg = 225, fg = colors.powder_blue })
-  hi(0, "Todo", { bg = colors.gray_asparagus, ctermbg = 11, ctermfg = 0, fg = colors.battleship_gray })
-  hi(0, "TooLong", { fg = colors.bright_red })
-  hi(0, "TreesitterContext", { bg = colors.gray_asparagus, italic = true })
-  hi(0, "Typedef", { fg = colors.celestial_blue })
-  hi(0, "Underlined", { ctermfg = 81, fg = colors.bright_red, underline = true })
-  hi(0, "User1", { bg = colors.gunmetal, fg = colors.bright_red })
-  hi(0, "User2", { bg = colors.gunmetal, fg = colors.dark_khaki })
-  hi(0, "User3", { bg = colors.gunmetal, fg = colors.silver_chalice })
-  hi(0, "User4", { bg = colors.gunmetal, fg = colors.maya_blue })
-  hi(0, "User5", { bg = colors.gunmetal, fg = colors.silver_chalice })
-  hi(0, "User6", { bg = colors.gray_asparagus, fg = colors.silver_chalice })
-  hi(0, "User7", { bg = colors.gunmetal, fg = colors.silver_chalice })
-  hi(0, "User8", { bg = colors.gunmetal, fg = colors.gray_asparagus })
-  hi(0, "User9", { bg = colors.gunmetal, fg = colors.gray_asparagus })
-  hi(0, "VertSplit", { fg = colors.silver_chalice })
-  hi(0, "Visual", { bg = colors.gunmetal, ctermbg = 242 })
-  hi(0, "VisualNOS", { fg = colors.bright_red })
-  hi(0, "WarningMsg", { ctermfg = 224, fg = colors.bright_red })
-  hi(0, "WildMenu", { bg = colors.battleship_gray, ctermbg = 11, ctermfg = 0, fg = colors.bright_red })
-  hi(0, "WinBar", { fg = colors.silver_chalice })
-  hi(0, "WinBarNC", { fg = colors.cadet_grey })
-  hi(0, "gitcommitBranch", { bold = true, fg = colors.dark_apricot })
-  hi(0, "gitcommitComment", { fg = colors.gray_asparagus })
-  hi(0, "gitcommitDiscarded", { fg = colors.gray_asparagus })
-  hi(0, "gitcommitDiscardedFile", { bold = true, fg = colors.bright_red })
-  hi(0, "gitcommitDiscardedType", { fg = colors.powder_blue })
-  hi(0, "gitcommitHeader", { fg = colors.dark_khaki })
-  hi(0, "gitcommitOverflow", { fg = colors.bright_red })
-  hi(0, "gitcommitSelected", { fg = colors.gray_asparagus })
-  hi(0, "gitcommitSelectedFile", { bold = true, fg = colors.lemon_glacier })
-  hi(0, "gitcommitSelectedType", { fg = colors.powder_blue })
-  hi(0, "gitcommitSummary", { fg = colors.lemon_glacier })
-  hi(0, "gitcommitUnmergedFile", { bold = true, fg = colors.bright_red })
-  hi(0, "gitcommitUnmergedType", { fg = colors.powder_blue })
-  hi(0, "gitcommitUntracked", { fg = colors.gray_asparagus })
-  hi(0, "gitcommitUntrackedFile", { fg = colors.battleship_gray })
-  hi(0, "iCursor", { bg = colors.celestial_blue, fg = colors.white })
-  hi(0, "lCursor", { bg = colors.light_gray, fg = colors.gray_asparagus })
+  -- UI elements
+  hi(0, "StatusLine", { fg = colors.fg, bg = colors.ui_bg })
+  hi(0, "StatusLineNC", { fg = colors.gutter_fg, bg = colors.ui_bg })
+  hi(0, "TabLine", { fg = colors.gutter_fg, bg = colors.ui_bg })
+  hi(0, "TabLineFill", { bg = colors.ui_bg })
+  hi(0, "TabLineSel", { fg = colors.fg, bg = colors.bg, bold = true })
+  hi(0, "VertSplit", { fg = colors.ui_border })
+  hi(0, "WinBar", { fg = colors.fg })
+  hi(0, "WinBarNC", { fg = colors.gutter_fg })
+  hi(0, "WinSeparator", { fg = colors.ui_border })
 
-  -- lualine.nvim
-  hi(0, "lualine_a_command", { bg = colors.granny_smith_apple, bold = true, fg = colors.black })
-  hi(0, "lualine_a_inactive", { bg = colors.cadet_grey, bold = true, fg = colors.black })
-  hi(0, "lualine_a_insert", { bg = colors.granny_smith_apple, bold = true, fg = colors.black })
-  hi(0, "lualine_a_normal", { bg = colors.granny_smith_apple, bold = true, fg = colors.black })
-  hi(0, "lualine_a_replace", { bg = colors.granny_smith_apple, bold = true, fg = colors.black })
-  hi(0, "lualine_a_visual", { bg = colors.granny_smith_apple, bold = true, fg = colors.black })
-  hi(0, "lualine_b_command", { bg = colors.granny_smith_apple, fg = colors.black })
-  hi(0, "lualine_b_diagnostics_error_command", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_diagnostics_error_inactive", { bg = colors.cadet_grey, fg = colors.bright_red })
-  hi(0, "lualine_b_diagnostics_error_insert", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_diagnostics_error_normal", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_diagnostics_error_replace", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_diagnostics_error_terminal", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_diagnostics_error_visual", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_diagnostics_hint_command", { bg = colors.granny_smith_apple, fg = colors.maya_blue })
-  hi(0, "lualine_b_diagnostics_hint_inactive", { bg = colors.cadet_grey, fg = colors.maya_blue })
-  hi(0, "lualine_b_diagnostics_hint_insert", { bg = colors.granny_smith_apple, fg = colors.maya_blue })
-  hi(0, "lualine_b_diagnostics_hint_normal", { bg = colors.granny_smith_apple, fg = colors.maya_blue })
-  hi(0, "lualine_b_diagnostics_hint_replace", { bg = colors.granny_smith_apple, fg = colors.maya_blue })
-  hi(0, "lualine_b_diagnostics_hint_terminal", { bg = colors.granny_smith_apple, fg = colors.maya_blue })
-  hi(0, "lualine_b_diagnostics_hint_visual", { bg = colors.granny_smith_apple, fg = colors.maya_blue })
-  hi(0, "lualine_b_diagnostics_info_command", { bg = colors.granny_smith_apple, fg = colors.silver_chalice })
-  hi(0, "lualine_b_diagnostics_info_inactive", { bg = colors.cadet_grey, fg = colors.silver_chalice })
-  hi(0, "lualine_b_diagnostics_info_insert", { bg = colors.granny_smith_apple, fg = colors.silver_chalice })
-  hi(0, "lualine_b_diagnostics_info_normal", { bg = colors.granny_smith_apple, fg = colors.silver_chalice })
-  hi(0, "lualine_b_diagnostics_info_replace", { bg = colors.granny_smith_apple, fg = colors.silver_chalice })
-  hi(0, "lualine_b_diagnostics_info_terminal", { bg = colors.granny_smith_apple, fg = colors.silver_chalice })
-  hi(0, "lualine_b_diagnostics_info_visual", { bg = colors.granny_smith_apple, fg = colors.silver_chalice })
-  hi(0, "lualine_b_diagnostics_warn_command", { bg = colors.granny_smith_apple, fg = colors.dark_khaki })
-  hi(0, "lualine_b_diagnostics_warn_inactive", { bg = colors.cadet_grey, fg = colors.dark_khaki })
-  hi(0, "lualine_b_diagnostics_warn_insert", { bg = colors.granny_smith_apple, fg = colors.dark_khaki })
-  hi(0, "lualine_b_diagnostics_warn_normal", { bg = colors.granny_smith_apple, fg = colors.dark_khaki })
-  hi(0, "lualine_b_diagnostics_warn_replace", { bg = colors.granny_smith_apple, fg = colors.dark_khaki })
-  hi(0, "lualine_b_diagnostics_warn_terminal", { bg = colors.granny_smith_apple, fg = colors.dark_khaki })
-  hi(0, "lualine_b_diagnostics_warn_visual", { bg = colors.granny_smith_apple, fg = colors.dark_khaki })
-  hi(0, "lualine_b_diff_added_command", { bg = colors.granny_smith_apple, fg = colors.lemon_glacier })
-  hi(0, "lualine_b_diff_added_inactive", { bg = colors.cadet_grey, fg = colors.lemon_glacier })
-  hi(0, "lualine_b_diff_added_insert", { bg = colors.granny_smith_apple, fg = colors.lemon_glacier })
-  hi(0, "lualine_b_diff_added_normal", { bg = colors.granny_smith_apple, fg = colors.lemon_glacier })
-  hi(0, "lualine_b_diff_added_replace", { bg = colors.granny_smith_apple, fg = colors.lemon_glacier })
-  hi(0, "lualine_b_diff_added_terminal", { bg = colors.granny_smith_apple, fg = colors.lemon_glacier })
-  hi(0, "lualine_b_diff_added_visual", { bg = colors.granny_smith_apple, fg = colors.lemon_glacier })
-  hi(0, "lualine_b_diff_modified_command", { bg = colors.granny_smith_apple, fg = colors.powder_blue })
-  hi(0, "lualine_b_diff_modified_inactive", { bg = colors.cadet_grey, fg = colors.powder_blue })
-  hi(0, "lualine_b_diff_modified_insert", { bg = colors.granny_smith_apple, fg = colors.powder_blue })
-  hi(0, "lualine_b_diff_modified_normal", { bg = colors.granny_smith_apple, fg = colors.powder_blue })
-  hi(0, "lualine_b_diff_modified_replace", { bg = colors.granny_smith_apple, fg = colors.powder_blue })
-  hi(0, "lualine_b_diff_modified_terminal", { bg = colors.granny_smith_apple, fg = colors.powder_blue })
-  hi(0, "lualine_b_diff_modified_visual", { bg = colors.granny_smith_apple, fg = colors.powder_blue })
-  hi(0, "lualine_b_diff_removed_command", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_diff_removed_inactive", { bg = colors.cadet_grey, fg = colors.bright_red })
-  hi(0, "lualine_b_diff_removed_insert", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_diff_removed_normal", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_diff_removed_replace", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_diff_removed_terminal", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_diff_removed_visual", { bg = colors.granny_smith_apple, fg = colors.bright_red })
-  hi(0, "lualine_b_inactive", { bg = colors.cadet_grey, fg = colors.black })
-  hi(0, "lualine_b_insert", { bg = colors.granny_smith_apple, fg = colors.black })
-  hi(0, "lualine_b_normal", { bg = colors.granny_smith_apple, fg = colors.black })
-  hi(0, "lualine_b_replace", { bg = colors.granny_smith_apple, fg = colors.black })
-  hi(0, "lualine_b_visual", { bg = colors.granny_smith_apple, fg = colors.black })
-  hi(0, "lualine_c_command", { bg = colors.granny_smith_apple, fg = colors.black })
-  hi(0, "lualine_c_inactive", { bg = colors.cadet_grey, fg = colors.black })
-  hi(0, "lualine_c_insert", { bg = colors.granny_smith_apple, fg = colors.black })
-  hi(0, "lualine_c_normal", { bg = colors.granny_smith_apple, fg = colors.black })
-  hi(0, "lualine_c_replace", { bg = colors.granny_smith_apple, fg = colors.black })
-  hi(0, "lualine_c_visual", { bg = colors.granny_smith_apple, fg = colors.black })
-  hi(0, "lualine_x_2_command", { bg = colors.granny_smith_apple, fg = colors.ochre })
-  hi(0, "lualine_x_2_inactive", { bg = colors.cadet_grey, fg = colors.ochre })
-  hi(0, "lualine_x_2_insert", { bg = colors.granny_smith_apple, fg = colors.ochre })
-  hi(0, "lualine_x_2_normal", { bg = colors.granny_smith_apple, fg = colors.ochre })
-  hi(0, "lualine_x_2_replace", { bg = colors.granny_smith_apple, fg = colors.ochre })
-  hi(0, "lualine_x_2_terminal", { bg = colors.granny_smith_apple, fg = colors.ochre })
-  hi(0, "lualine_x_2_visual", { bg = colors.granny_smith_apple, fg = colors.ochre })
-  hi(0, "lualine_x_filetype_DevIconDefault_command", { bg = colors.granny_smith_apple, fg = colors.metallic_silver })
-  hi(0, "lualine_x_filetype_DevIconDefault_inactive", { bg = colors.cadet_grey, fg = colors.metallic_silver })
-  hi(0, "lualine_x_filetype_DevIconDefault_insert", { bg = colors.granny_smith_apple, fg = colors.metallic_silver })
-  hi(0, "lualine_x_filetype_DevIconDefault_normal", { bg = colors.granny_smith_apple, fg = colors.metallic_silver })
-  hi(0, "lualine_x_filetype_DevIconDefault_replace", { bg = colors.granny_smith_apple, fg = colors.metallic_silver })
-  hi(0, "lualine_x_filetype_DevIconDefault_terminal", { bg = colors.granny_smith_apple, fg = colors.metallic_silver })
-  hi(0, "lualine_x_filetype_DevIconDefault_visual", { bg = colors.granny_smith_apple, fg = colors.metallic_silver })
+  -- Completion menu
+  hi(0, "Pmenu", { fg = colors.fg, bg = colors.pmenu_bg })
+  hi(0, "PmenuSel", { fg = colors.white, bg = colors.pmenu_sel })
+  hi(0, "PmenuSbar", { bg = colors.ui_bg })
+  hi(0, "PmenuThumb", { bg = colors.gutter_fg })
+  hi(0, "WildMenu", { link = "PmenuSel" })
 
-  -- nvim-ts-rainbow
-  hi(0, "rainbowcol1", { fg = colors.ghost_white })
-  hi(0, "rainbowcol2", { fg = colors.dark_apricot })
-  hi(0, "rainbowcol3", { fg = colors.battleship_gray })
-  hi(0, "rainbowcol4", { fg = colors.white })
-  hi(0, "rainbowcol5", { fg = colors.maya_blue })
-  hi(0, "rainbowcol6", { fg = colors.powder_blue })
-  hi(0, "rainbowcol7", { fg = colors.dark_khaki })
+  -- Misc
+  hi(0, "Directory", { fg = colors.link })
+  hi(0, "NonText", { fg = colors.gutter_fg })
+  hi(0, "SpecialKey", { fg = colors.gutter_fg })
+  hi(0, "Whitespace", { fg = colors.gutter_fg })
+  hi(0, "ColorColumn", { bg = colors.line_highlight })
+  hi(0, "QuickFixLine", { bg = colors.selection })
+  hi(0, "MatchParen", { fg = colors.bright_yellow, bold = true })
 
-  hi(0, "@lsp.type.keyword.go", { link = "TSKeyword" })
-  hi(0, "@lsp.type.string.go", { link = "TSString" })
-  hi(0, "Statement", { link = "TSKeyword" })
-  hi(0, "Comment", { link = "TSComment" })
-  hi(0, "Number", { link = "TSNumber" })
-  hi(0, "String", { link = "TSString" })
-  hi(0, "goImportString", { link = "TSString" })
-  hi(0, "@lsp.type.function", { link = "TSMethodCall" })
-  hi(0, "@lsp.typemod.function.definition", { link = "TSFunction" })
-  hi(0, "@lsp.type.method", { link = "TSMethod" })
-  hi(0, "goBlock", { link = "TSVariable" })
-  hi(0, "Identifier", { link = "TSKeyword" })
-  -- Terminal colors
+  -- ============================================================================
+  -- SYNTAX HIGHLIGHTING (Base)
+  -- ============================================================================
+  hi(0, "Comment", { fg = colors.comment, italic = true })
+  hi(0, "Constant", { fg = colors.constant })
+  hi(0, "String", { fg = colors.string })
+  hi(0, "Character", { fg = colors.string })
+  hi(0, "Number", { fg = colors.number })
+  hi(0, "Boolean", { fg = colors.keyword })
+  hi(0, "Float", { fg = colors.number })
+
+  hi(0, "Identifier", { fg = colors.fg })
+  hi(0, "Function", { fg = colors.function_name })
+
+  hi(0, "Statement", { fg = colors.keyword })
+  hi(0, "Conditional", { fg = colors.keyword })
+  hi(0, "Repeat", { fg = colors.keyword })
+  hi(0, "Label", { fg = colors.keyword })
+  hi(0, "Operator", { fg = colors.fg })
+  hi(0, "Keyword", { fg = colors.keyword })
+  hi(0, "Exception", { fg = colors.keyword })
+
+  hi(0, "PreProc", { fg = colors.keyword })
+  hi(0, "Include", { fg = colors.keyword })
+  hi(0, "Define", { fg = colors.keyword })
+  hi(0, "Macro", { fg = colors.keyword })
+  hi(0, "PreCondit", { fg = colors.keyword })
+
+  hi(0, "Type", { fg = colors.type })
+  hi(0, "StorageClass", { fg = colors.keyword })
+  hi(0, "Structure", { fg = colors.keyword })
+  hi(0, "Typedef", { fg = colors.keyword })
+
+  hi(0, "Special", { fg = colors.tag })
+  hi(0, "SpecialChar", { fg = colors.tag })
+  hi(0, "Tag", { fg = colors.tag })
+  hi(0, "Delimiter", { fg = colors.fg })
+  hi(0, "SpecialComment", { fg = colors.doc_comment, italic = true })
+  hi(0, "Debug", { fg = colors.error })
+
+  hi(0, "Underlined", { fg = colors.link, underline = true })
+  hi(0, "Ignore", { fg = colors.gutter_fg })
+  hi(0, "Error", { fg = colors.error, bold = true })
+  hi(0, "Todo", { fg = colors.todo, bg = colors.line_highlight, bold = true })
+
+  -- ============================================================================
+  -- TREESITTER
+  -- ============================================================================
+  hi(0, "@variable", { fg = colors.fg })
+  hi(0, "@variable.builtin", { fg = colors.keyword, bold = true })
+  hi(0, "@variable.parameter", { fg = colors.parameter })
+  hi(0, "@variable.member", { fg = colors.constant })
+
+  hi(0, "@constant", { fg = colors.constant })
+  hi(0, "@constant.builtin", { fg = colors.keyword, bold = true })
+  hi(0, "@constant.macro", { fg = colors.constant })
+
+  hi(0, "@module", { fg = colors.fg })
+  hi(0, "@label", { fg = colors.constant })
+
+  hi(0, "@string", { fg = colors.string })
+  hi(0, "@string.escape", { fg = colors.number })
+  hi(0, "@string.regexp", { fg = colors.number })
+  hi(0, "@string.special", { fg = colors.tag })
+
+  hi(0, "@character", { fg = colors.string })
+  hi(0, "@character.special", { fg = colors.tag })
+
+  hi(0, "@number", { fg = colors.number })
+  hi(0, "@number.float", { fg = colors.number })
+  hi(0, "@boolean", { fg = colors.keyword })
+
+  hi(0, "@function", { fg = colors.function_name })
+  hi(0, "@function.builtin", { fg = colors.function_name, bold = true })
+  hi(0, "@function.call", { fg = colors.function_name })
+  hi(0, "@function.macro", { fg = colors.keyword })
+  hi(0, "@function.method", { fg = colors.function_name })
+  hi(0, "@function.method.call", { fg = colors.function_name })
+
+  hi(0, "@constructor", { fg = colors.function_name })
+  hi(0, "@operator", { fg = colors.fg })
+
+  hi(0, "@keyword", { fg = colors.keyword })
+  hi(0, "@keyword.function", { fg = colors.keyword })
+  hi(0, "@keyword.operator", { fg = colors.keyword })
+  hi(0, "@keyword.return", { fg = colors.keyword })
+  hi(0, "@keyword.import", { fg = colors.keyword })
+  hi(0, "@keyword.conditional", { fg = colors.keyword })
+  hi(0, "@keyword.repeat", { fg = colors.keyword })
+  hi(0, "@keyword.exception", { fg = colors.keyword })
+
+  hi(0, "@type", { fg = colors.class_name })
+  hi(0, "@type.builtin", { fg = colors.keyword, bold = true })
+  hi(0, "@type.definition", { fg = colors.class_name })
+  hi(0, "@type.qualifier", { fg = colors.keyword })
+
+  hi(0, "@attribute", { fg = colors.decorator })
+  hi(0, "@property", { fg = colors.constant })
+  hi(0, "@field", { fg = colors.constant })
+
+  hi(0, "@comment", { link = "Comment" })
+  hi(0, "@comment.documentation", { fg = colors.doc_comment, italic = true })
+  hi(0, "@comment.todo", { fg = colors.todo, bold = true })
+  hi(0, "@comment.warning", { fg = colors.warning, bold = true })
+  hi(0, "@comment.error", { fg = colors.error, bold = true })
+  hi(0, "@comment.note", { fg = colors.info, bold = true })
+
+  hi(0, "@punctuation.delimiter", { fg = colors.fg })
+  hi(0, "@punctuation.bracket", { fg = colors.fg })
+  hi(0, "@punctuation.special", { fg = colors.fg })
+
+  hi(0, "@tag", { fg = colors.tag })
+  hi(0, "@tag.attribute", { fg = colors.attribute })
+  hi(0, "@tag.delimiter", { fg = colors.fg })
+
+  hi(0, "@markup.strong", { bold = true })
+  hi(0, "@markup.italic", { italic = true })
+  hi(0, "@markup.strikethrough", { strikethrough = true })
+  hi(0, "@markup.underline", { underline = true })
+  hi(0, "@markup.heading", { fg = colors.function_name, bold = true })
+  hi(0, "@markup.link", { fg = colors.link, underline = true })
+  hi(0, "@markup.link.url", { fg = colors.link, underline = true })
+  hi(0, "@markup.raw", { fg = colors.string })
+  hi(0, "@markup.math", { fg = colors.number })
+  hi(0, "@markup.list", { fg = colors.keyword })
+  hi(0, "@markup.list.checked", { fg = colors.git_add })
+  hi(0, "@markup.list.unchecked", { fg = colors.gutter_fg })
+
+  -- Diff
+  hi(0, "@diff.plus", { fg = colors.git_add })
+  hi(0, "@diff.minus", { fg = colors.git_delete })
+  hi(0, "@diff.delta", { fg = colors.git_change })
+
+  -- ============================================================================
+  -- LSP SEMANTIC TOKENS
+  -- ============================================================================
+  hi(0, "@lsp.type.namespace", { fg = colors.fg })
+  hi(0, "@lsp.type.type", { fg = colors.class_name })
+  hi(0, "@lsp.type.class", { fg = colors.class_name })
+  hi(0, "@lsp.type.enum", { fg = colors.class_name })
+  hi(0, "@lsp.type.interface", { fg = colors.class_name })
+  hi(0, "@lsp.type.struct", { fg = colors.class_name })
+  hi(0, "@lsp.type.parameter", { fg = colors.parameter })
+  hi(0, "@lsp.type.variable", { fg = colors.fg })
+  hi(0, "@lsp.type.property", { fg = colors.constant })
+  hi(0, "@lsp.type.enumMember", { fg = colors.constant })
+  hi(0, "@lsp.type.function", { fg = colors.function_name })
+  hi(0, "@lsp.type.method", { fg = colors.function_name })
+  hi(0, "@lsp.type.macro", { fg = colors.keyword })
+  hi(0, "@lsp.type.decorator", { fg = colors.decorator })
+  hi(0, "@lsp.type.comment", { link = "Comment" })
+
+  -- LSP modifiers
+  hi(0, "@lsp.mod.readonly", { italic = true })
+  hi(0, "@lsp.mod.deprecated", { strikethrough = true, fg = colors.gutter_fg })
+  hi(0, "@lsp.typemod.function.defaultLibrary", { fg = colors.function_name, bold = true })
+  hi(0, "@lsp.typemod.variable.defaultLibrary", { fg = colors.keyword, bold = true })
+  hi(0, "@lsp.typemod.variable.readonly", { fg = colors.constant })
+
+  -- ============================================================================
+  -- GO LANGUAGE SPECIFIC
+  -- ============================================================================
+  -- Go keywords and types
+  hi(0, "@keyword.go", { fg = colors.keyword })
+  hi(0, "@keyword.function.go", { fg = colors.keyword })
+  hi(0, "@keyword.operator.go", { fg = colors.keyword })
+  hi(0, "@keyword.import.go", { fg = colors.keyword })
+  hi(0, "@type.builtin.go", { fg = colors.keyword, bold = true })
+
+  -- Go functions and methods
+  hi(0, "@function.go", { fg = colors.function_name })
+  hi(0, "@function.method.go", { fg = colors.function_name })
+  hi(0, "@function.call.go", { fg = colors.function_name })
+  hi(0, "@function.method.call.go", { fg = colors.function_name })
+
+  -- Go variables and constants
+  hi(0, "@variable.go", { fg = colors.fg })
+  hi(0, "@variable.builtin.go", { fg = colors.keyword, bold = true })
+  hi(0, "@constant.go", { fg = colors.constant })
+  hi(0, "@constant.builtin.go", { fg = colors.keyword, bold = true })
+
+  -- Go types
+  hi(0, "@type.go", { fg = colors.class_name })
+  hi(0, "@type.definition.go", { fg = colors.class_name })
+
+  -- Go fields and properties
+  hi(0, "@property.go", { fg = colors.constant })
+  hi(0, "@field.go", { fg = colors.constant })
+  hi(0, "@variable.member.go", { fg = colors.constant })
+
+  -- Go strings and comments
+  hi(0, "@string.go", { fg = colors.string })
+  hi(0, "@comment.go", { fg = colors.comment, italic = true })
+  hi(0, "@comment.documentation.go", { fg = colors.doc_comment, italic = true })
+
+  -- Go numbers
+  hi(0, "@number.go", { fg = colors.number })
+
+  -- LSP semantic tokens for Go
+  hi(0, "@lsp.type.namespace.go", { fg = colors.fg })
+  hi(0, "@lsp.type.type.go", { fg = colors.class_name })
+  hi(0, "@lsp.type.struct.go", { fg = colors.class_name })
+  hi(0, "@lsp.type.interface.go", { fg = colors.class_name })
+  hi(0, "@lsp.type.function.go", { fg = colors.function_name })
+  hi(0, "@lsp.type.method.go", { fg = colors.function_name })
+  hi(0, "@lsp.type.variable.go", { fg = colors.fg })
+  hi(0, "@lsp.type.parameter.go", { fg = colors.parameter })
+  hi(0, "@lsp.type.property.go", { fg = colors.constant })
+  hi(0, "@lsp.typemod.variable.readonly.go", { fg = colors.constant })
+  hi(0, "@lsp.typemod.variable.defaultLibrary.go", { fg = colors.keyword, bold = true })
+  hi(0, "@lsp.mod.defaultLibrary.go", { fg = colors.keyword, bold = true })
+
+  -- Legacy syntax support for Go
+  hi(0, "goImportString", { link = "@string.go" })
+  hi(0, "goBlock", { link = "@variable.go" })
+
+  -- ============================================================================
+  -- DIAGNOSTICS
+  -- ============================================================================
+  hi(0, "DiagnosticError", { fg = colors.error })
+  hi(0, "DiagnosticWarn", { fg = colors.warning })
+  hi(0, "DiagnosticInfo", { fg = colors.info })
+  hi(0, "DiagnosticHint", { fg = colors.hint })
+  hi(0, "DiagnosticOk", { fg = colors.git_add })
+
+  hi(0, "DiagnosticUnderlineError", { sp = colors.error, undercurl = true })
+  hi(0, "DiagnosticUnderlineWarn", { sp = colors.warning, undercurl = true })
+  hi(0, "DiagnosticUnderlineInfo", { sp = colors.info, undercurl = true })
+  hi(0, "DiagnosticUnderlineHint", { sp = colors.hint, undercurl = true })
+  hi(0, "DiagnosticUnderlineOk", { sp = colors.git_add, undercurl = true })
+
+  hi(0, "DiagnosticVirtualTextError", { fg = colors.error, bg = colors.bg })
+  hi(0, "DiagnosticVirtualTextWarn", { fg = colors.warning, bg = colors.bg })
+  hi(0, "DiagnosticVirtualTextInfo", { fg = colors.info, bg = colors.bg })
+  hi(0, "DiagnosticVirtualTextHint", { fg = colors.hint, bg = colors.bg })
+
+  hi(0, "DiagnosticSignError", { fg = colors.error, bg = colors.gutter_bg })
+  hi(0, "DiagnosticSignWarn", { fg = colors.warning, bg = colors.gutter_bg })
+  hi(0, "DiagnosticSignInfo", { fg = colors.info, bg = colors.gutter_bg })
+  hi(0, "DiagnosticSignHint", { fg = colors.hint, bg = colors.gutter_bg })
+
+  -- ============================================================================
+  -- DIFF
+  -- ============================================================================
+  hi(0, "DiffAdd", { bg = colors.diff_add })
+  hi(0, "DiffChange", { bg = colors.diff_change })
+  hi(0, "DiffDelete", { bg = colors.diff_delete })
+  hi(0, "DiffText", { bg = colors.diff_text })
+
+  hi(0, "DiffAdded", { fg = colors.git_add })
+  hi(0, "DiffRemoved", { fg = colors.git_delete })
+  hi(0, "DiffChanged", { fg = colors.git_change })
+  hi(0, "DiffFile", { fg = colors.function_name })
+  hi(0, "DiffLine", { fg = colors.number })
+
+  -- ============================================================================
+  -- GIT SIGNS
+  -- ============================================================================
+  hi(0, "GitSignsAdd", { fg = colors.git_add, bg = colors.gutter_bg })
+  hi(0, "GitSignsChange", { fg = colors.git_change, bg = colors.gutter_bg })
+  hi(0, "GitSignsDelete", { fg = colors.git_delete, bg = colors.gutter_bg })
+  hi(0, "GitSignsCurrentLineBlame", { fg = colors.comment, italic = true })
+
+  hi(0, "GitSignsStagedAdd", { fg = colors.git_add, bg = colors.gutter_bg })
+  hi(0, "GitSignsStagedChange", { fg = colors.git_change, bg = colors.gutter_bg })
+  hi(0, "GitSignsStagedDelete", { fg = colors.git_delete, bg = colors.gutter_bg })
+
+  hi(0, "GitGutterAdd", { link = "GitSignsAdd" })
+  hi(0, "GitGutterChange", { link = "GitSignsChange" })
+  hi(0, "GitGutterDelete", { link = "GitSignsDelete" })
+
+  -- ============================================================================
+  -- SNACKS.NVIM - PICKER
+  -- ============================================================================
+  -- Picker window
+  hi(0, "SnacksPickerNormalFloat", { link = "NormalFloat" })
+  hi(0, "SnacksPickerBorder", { fg = colors.ui_border, bg = colors.ui_bg })
+  hi(0, "SnacksPickerTitle", { fg = colors.function_name, bg = colors.ui_bg, bold = true })
+  hi(0, "SnacksPickerFooter", { fg = colors.gutter_fg, bg = colors.ui_bg })
+  hi(0, "SnacksPickerCursorLine", { bg = colors.selection })
+
+  -- Picker list
+  hi(0, "SnacksPickerList", { link = "NormalFloat" })
+  hi(0, "SnacksPickerListCursorLine", { bg = colors.selection })
+
+  -- Picker preview
+  hi(0, "SnacksPickerPreview", { link = "NormalFloat" })
+  hi(0, "SnacksPickerPreviewCursorLine", { bg = colors.selection })
+
+  -- Picker input/prompt
+  hi(0, "SnacksPickerPrompt", { fg = colors.fg, bg = colors.ui_bg })
+  hi(0, "SnacksPickerInput", { fg = colors.fg, bg = colors.ui_bg })
+  hi(0, "SnacksPickerInputSearch", { fg = colors.function_name, bg = colors.ui_bg })
+
+  -- Picker highlighting
+  hi(0, "SnacksPickerMatch", { fg = colors.function_name, bold = true })
+  hi(0, "SnacksPickerSearch", { bg = colors.search })
+  hi(0, "SnacksPickerSelected", { fg = colors.bright_green, bold = true })
+  hi(0, "SnacksPickerUnselected", { fg = colors.gutter_fg })
+
+  -- Files and directories
+  hi(0, "SnacksPickerFile", { fg = colors.fg })
+  hi(0, "SnacksPickerDir", { fg = colors.link })
+  hi(0, "SnacksPickerDirectory", { fg = colors.link })
+  hi(0, "SnacksPickerPathHidden", { fg = colors.gutter_fg })
+  hi(0, "SnacksPickerPathIgnored", { fg = colors.comment, italic = true })
+  hi(0, "SnacksPickerLink", { fg = colors.link, underline = true })
+  hi(0, "SnacksPickerLinkBroken", { fg = colors.error, underline = true })
+
+  -- Git status in picker
+  hi(0, "SnacksPickerGitStatus", { fg = colors.gutter_fg })
+  hi(0, "SnacksPickerGitStatusAdded", { fg = colors.git_add })
+  hi(0, "SnacksPickerGitStatusModified", { fg = colors.git_change })
+  hi(0, "SnacksPickerGitStatusDeleted", { fg = colors.git_delete })
+  hi(0, "SnacksPickerGitStatusRenamed", { fg = colors.function_name })
+  hi(0, "SnacksPickerGitStatusCopied", { fg = colors.function_name })
+  hi(0, "SnacksPickerGitStatusUntracked", { fg = colors.git_add })
+  hi(0, "SnacksPickerGitStatusStaged", { fg = colors.git_add, bold = true })
+  hi(0, "SnacksPickerGitStatusUnmerged", { fg = colors.error })
+
+  -- Git information
+  hi(0, "SnacksPickerGitBranch", { fg = colors.constant })
+  hi(0, "SnacksPickerGitBranchCurrent", { fg = colors.git_add, bold = true })
+  hi(0, "SnacksPickerGitDetached", { fg = colors.error })
+  hi(0, "SnacksPickerGitCommit", { fg = colors.function_name })
+  hi(0, "SnacksPickerGitDate", { fg = colors.comment })
+  hi(0, "SnacksPickerGitAuthor", { fg = colors.fg })
+  hi(0, "SnacksPickerGitMsg", { fg = colors.string })
+  hi(0, "SnacksPickerGitScope", { fg = colors.constant })
+  hi(0, "SnacksPickerGitType", { fg = colors.keyword })
+  hi(0, "SnacksPickerGitBreaking", { fg = colors.error, bold = true })
+  hi(0, "SnacksPickerGitIssue", { fg = colors.link })
+
+  -- Icons and markers
+  hi(0, "SnacksPickerIcon", { fg = colors.function_name })
+  hi(0, "SnacksPickerIconCategory", { fg = colors.constant })
+  hi(0, "SnacksPickerIconName", { fg = colors.fg })
+  hi(0, "SnacksPickerIconSource", { fg = colors.comment })
+
+  -- UI elements
+  hi(0, "SnacksPickerSpinner", { fg = colors.function_name })
+  hi(0, "SnacksPickerRule", { fg = colors.ui_border })
+  hi(0, "SnacksPickerIdx", { fg = colors.number })
+  hi(0, "SnacksPickerRow", { fg = colors.comment })
+  hi(0, "SnacksPickerCol", { fg = colors.comment })
+  hi(0, "SnacksPickerTotals", { fg = colors.comment })
+  hi(0, "SnacksPickerToggle", { fg = colors.function_name })
+  hi(0, "SnacksPickerSpecial", { fg = colors.tag })
+  hi(0, "SnacksPickerLabel", { fg = colors.function_name })
+  hi(0, "SnacksPickerDelim", { fg = colors.gutter_fg })
+  hi(0, "SnacksPickerDimmed", { fg = colors.gutter_fg })
+
+  -- Syntax in picker
+  hi(0, "SnacksPickerCode", { fg = colors.string })
+  hi(0, "SnacksPickerComment", { fg = colors.comment, italic = true })
+  hi(0, "SnacksPickerBold", { bold = true })
+  hi(0, "SnacksPickerItalic", { italic = true })
+
+  -- LSP and diagnostics in picker
+  hi(0, "SnacksPickerLspAttached", { fg = colors.git_add })
+  hi(0, "SnacksPickerLspAttachedBuf", { fg = colors.git_add })
+  hi(0, "SnacksPickerLspEnabled", { fg = colors.git_add })
+  hi(0, "SnacksPickerLspDisabled", { fg = colors.error })
+  hi(0, "SnacksPickerLspUnavailable", { fg = colors.comment })
+
+  hi(0, "SnacksPickerDiagnosticCode", { fg = colors.comment })
+  hi(0, "SnacksPickerDiagnosticSource", { fg = colors.comment })
+
+  -- Additional picker elements
+  hi(0, "SnacksPickerBufNr", { fg = colors.number })
+  hi(0, "SnacksPickerBufType", { fg = colors.keyword })
+  hi(0, "SnacksPickerBufFlags", { fg = colors.constant })
+  hi(0, "SnacksPickerFileType", { fg = colors.keyword })
+  hi(0, "SnacksPickerTime", { fg = colors.comment })
+  hi(0, "SnacksPickerTree", { fg = colors.gutter_fg })
+  hi(0, "SnacksPickerBox", { fg = colors.ui_border })
+  hi(0, "SnacksPickerPickWin", { fg = colors.function_name })
+  hi(0, "SnacksPickerDesc", { fg = colors.comment })
+  hi(0, "SnacksPickerCmd", { fg = colors.function_name })
+  hi(0, "SnacksPickerRegister", { fg = colors.constant })
+
+  -- Keymap picker
+  hi(0, "SnacksPickerKeymapMode", { fg = colors.constant })
+  hi(0, "SnacksPickerKeymapLhs", { fg = colors.function_name })
+  hi(0, "SnacksPickerKeymapRhs", { fg = colors.string })
+  hi(0, "SnacksPickerKeymapNowait", { fg = colors.keyword })
+
+  -- Man pages
+  hi(0, "SnacksPickerManPage", { fg = colors.function_name })
+  hi(0, "SnacksPickerManSection", { fg = colors.constant })
+  hi(0, "SnacksPickerManDesc", { fg = colors.comment })
+
+  -- Autocommands
+  hi(0, "SnacksPickerAuEvent", { fg = colors.constant })
+  hi(0, "SnacksPickerAuGroup", { fg = colors.function_name })
+  hi(0, "SnacksPickerAuPattern", { fg = colors.string })
+
+  -- Undo tree
+  hi(0, "SnacksPickerUndoCurrent", { fg = colors.function_name, bold = true })
+  hi(0, "SnacksPickerUndoSaved", { fg = colors.git_add })
+  hi(0, "SnacksPickerUndoAdded", { fg = colors.git_add })
+  hi(0, "SnacksPickerUndoRemoved", { fg = colors.git_delete })
+
+  -- Notifications
+  hi(0, "SnacksPickerNotificationMessage", { fg = colors.fg })
+
+  -- ============================================================================
+  -- SNACKS.NVIM - DASHBOARD
+  -- ============================================================================
+  hi(0, "SnacksDashboardNormal", { link = "Normal" })
+  hi(0, "SnacksDashboardIcon", { fg = colors.function_name })
+  hi(0, "SnacksDashboardDesc", { fg = colors.fg })
+  hi(0, "SnacksDashboardKey", { fg = colors.keyword, bold = true })
+  hi(0, "SnacksDashboardTitle", { fg = colors.function_name, bold = true })
+  hi(0, "SnacksDashboardHeader", { fg = colors.constant })
+  hi(0, "SnacksDashboardFooter", { fg = colors.comment })
+  hi(0, "SnacksDashboardTerminal", { link = "Normal" })
+
+  -- ============================================================================
+  -- SNACKS.NVIM - OTHER COMPONENTS
+  -- ============================================================================
+  -- Input
+  hi(0, "SnacksInputNormal", { link = "NormalFloat" })
+  hi(0, "SnacksInputBorder", { fg = colors.ui_border, bg = colors.ui_bg })
+  hi(0, "SnacksInputTitle", { fg = colors.function_name, bg = colors.ui_bg, bold = true })
+
+  -- Notifications
+  hi(0, "SnacksNotifierHistory", { link = "NormalFloat" })
+  hi(0, "SnacksNotifierBorder", { fg = colors.ui_border, bg = colors.ui_bg })
+  hi(0, "SnacksNotifierTitle", { fg = colors.function_name, bg = colors.ui_bg, bold = true })
+  hi(0, "SnacksNotifierIcon", { fg = colors.function_name })
+
+  -- Footer
+  hi(0, "SnacksFooter", { fg = colors.comment, bg = colors.ui_bg })
+  hi(0, "SnacksFooterKey", { fg = colors.keyword, bold = true })
+  hi(0, "SnacksFooterDesc", { fg = colors.fg })
+
+  -- Backdrop
+  hi(0, "SnacksBackdrop", { bg = colors.black })
+
+  -- Diff
+  hi(0, "SnacksDiffAdd", { fg = colors.git_add })
+  hi(0, "SnacksDiffConflict", { fg = colors.error })
+  hi(0, "SnacksDiffContext", { fg = colors.comment })
+  hi(0, "SnacksDiffDelete", { fg = colors.git_delete })
+  hi(0, "SnacksDiffHeader", { fg = colors.function_name, bold = true })
+  hi(0, "SnacksDiffLabel", { fg = colors.constant })
+
+  -- Debug
+  hi(0, "SnacksDebug", { fg = colors.error })
+  hi(0, "SnacksDebugPrint", { fg = colors.function_name })
+  hi(0, "SnacksDebugIndent", { fg = colors.gutter_fg })
+
+  -- Dim
+  hi(0, "SnacksDim", { fg = colors.gutter_fg })
+
+  -- ============================================================================
+  -- COMPLETION (nvim-cmp)
+  -- ============================================================================
+  hi(0, "CmpDocumentation", { fg = colors.fg, bg = colors.ui_bg })
+  hi(0, "CmpDocumentationBorder", { fg = colors.ui_border, bg = colors.ui_bg })
+
+  hi(0, "CmpItemAbbr", { fg = colors.fg })
+  hi(0, "CmpItemAbbrDeprecated", { fg = colors.gutter_fg, strikethrough = true })
+  hi(0, "CmpItemAbbrMatch", { fg = colors.function_name, bold = true })
+  hi(0, "CmpItemAbbrMatchFuzzy", { fg = colors.function_name, bold = true })
+
+  hi(0, "CmpItemKindText", { fg = colors.fg })
+  hi(0, "CmpItemKindMethod", { fg = colors.function_name })
+  hi(0, "CmpItemKindFunction", { fg = colors.function_name })
+  hi(0, "CmpItemKindConstructor", { fg = colors.function_name })
+  hi(0, "CmpItemKindField", { fg = colors.constant })
+  hi(0, "CmpItemKindVariable", { fg = colors.fg })
+  hi(0, "CmpItemKindClass", { fg = colors.class_name })
+  hi(0, "CmpItemKindInterface", { fg = colors.class_name })
+  hi(0, "CmpItemKindModule", { fg = colors.fg })
+  hi(0, "CmpItemKindProperty", { fg = colors.constant })
+  hi(0, "CmpItemKindUnit", { fg = colors.constant })
+  hi(0, "CmpItemKindValue", { fg = colors.constant })
+  hi(0, "CmpItemKindEnum", { fg = colors.class_name })
+  hi(0, "CmpItemKindKeyword", { fg = colors.keyword })
+  hi(0, "CmpItemKindSnippet", { fg = colors.string })
+  hi(0, "CmpItemKindColor", { fg = colors.tag })
+  hi(0, "CmpItemKindFile", { fg = colors.fg })
+  hi(0, "CmpItemKindReference", { fg = colors.link })
+  hi(0, "CmpItemKindFolder", { fg = colors.link })
+  hi(0, "CmpItemKindEnumMember", { fg = colors.constant })
+  hi(0, "CmpItemKindConstant", { fg = colors.constant })
+  hi(0, "CmpItemKindStruct", { fg = colors.class_name })
+  hi(0, "CmpItemKindEvent", { fg = colors.keyword })
+  hi(0, "CmpItemKindOperator", { fg = colors.fg })
+  hi(0, "CmpItemKindTypeParameter", { fg = colors.type })
+
+  hi(0, "CmpItemMenu", { fg = colors.comment })
+
+  -- ============================================================================
+  -- TELESCOPE
+  -- ============================================================================
+  hi(0, "TelescopeBorder", { fg = colors.ui_border, bg = colors.ui_bg })
+  hi(0, "TelescopeNormal", { fg = colors.fg, bg = colors.ui_bg })
+  hi(0, "TelescopeSelection", { bg = colors.selection })
+  hi(0, "TelescopeSelectionCaret", { fg = colors.function_name })
+  hi(0, "TelescopeMultiSelection", { fg = colors.constant })
+  hi(0, "TelescopeMatching", { fg = colors.function_name, bold = true })
+
+  hi(0, "TelescopePromptNormal", { fg = colors.fg, bg = colors.ui_bg })
+  hi(0, "TelescopePromptBorder", { fg = colors.ui_border, bg = colors.ui_bg })
+  hi(0, "TelescopePromptTitle", { fg = colors.function_name, bg = colors.ui_bg, bold = true })
+  hi(0, "TelescopePromptPrefix", { fg = colors.keyword })
+
+  hi(0, "TelescopeResultsNormal", { fg = colors.fg, bg = colors.ui_bg })
+  hi(0, "TelescopeResultsBorder", { fg = colors.ui_border, bg = colors.ui_bg })
+  hi(0, "TelescopeResultsTitle", { fg = colors.function_name, bg = colors.ui_bg, bold = true })
+
+  hi(0, "TelescopePreviewNormal", { fg = colors.fg, bg = colors.bg })
+  hi(0, "TelescopePreviewBorder", { fg = colors.ui_border, bg = colors.bg })
+  hi(0, "TelescopePreviewTitle", { fg = colors.function_name, bg = colors.bg, bold = true })
+  hi(0, "TelescopePreviewLine", { bg = colors.line_highlight })
+
+  -- ============================================================================
+  -- TREE FILE EXPLORER (neo-tree, nvim-tree)
+  -- ============================================================================
+  hi(0, "NeoTreeNormal", { fg = colors.fg, bg = colors.bg })
+  hi(0, "NeoTreeNormalNC", { fg = colors.fg, bg = colors.bg })
+  hi(0, "NeoTreeDirectoryIcon", { fg = colors.link })
+  hi(0, "NeoTreeDirectoryName", { fg = colors.link })
+  hi(0, "NeoTreeFileName", { fg = colors.fg })
+  hi(0, "NeoTreeFileIcon", { fg = colors.fg })
+  hi(0, "NeoTreeGitAdded", { fg = colors.git_add })
+  hi(0, "NeoTreeGitModified", { fg = colors.git_change })
+  hi(0, "NeoTreeGitDeleted", { fg = colors.git_delete })
+  hi(0, "NeoTreeGitUntracked", { fg = colors.git_add })
+  hi(0, "NeoTreeGitIgnored", { fg = colors.comment, italic = true })
+  hi(0, "NeoTreeRootName", { fg = colors.function_name, bold = true })
+
+  hi(0, "NvimTreeNormal", { fg = colors.fg, bg = colors.bg })
+  hi(0, "NvimTreeFolderIcon", { fg = colors.link })
+  hi(0, "NvimTreeFolderName", { fg = colors.link })
+  hi(0, "NvimTreeOpenedFolderName", { fg = colors.link, bold = true })
+  hi(0, "NvimTreeRootFolder", { fg = colors.function_name, bold = true })
+  hi(0, "NvimTreeGitDirty", { fg = colors.git_change })
+  hi(0, "NvimTreeGitNew", { fg = colors.git_add })
+  hi(0, "NvimTreeGitDeleted", { fg = colors.git_delete })
+  hi(0, "NvimTreeSpecialFile", { fg = colors.tag })
+
+  -- ============================================================================
+  -- INDENT BLANKLINE
+  -- ============================================================================
+  hi(0, "IblIndent", { fg = colors.line_highlight, nocombine = true })
+  hi(0, "IblScope", { fg = colors.gutter_fg, nocombine = true })
+  hi(0, "IblWhitespace", { fg = colors.line_highlight, nocombine = true })
+
+  -- Legacy names
+  hi(0, "IndentBlanklineChar", { link = "IblIndent" })
+  hi(0, "IndentBlanklineContextChar", { link = "IblScope" })
+  hi(0, "IndentBlanklineSpaceChar", { link = "IblWhitespace" })
+
+  -- ============================================================================
+  -- SPELL CHECKING
+  -- ============================================================================
+  hi(0, "SpellBad", { sp = colors.error, undercurl = true })
+  hi(0, "SpellCap", { sp = colors.hint, undercurl = true })
+  hi(0, "SpellLocal", { sp = colors.info, undercurl = true })
+  hi(0, "SpellRare", { sp = colors.warning, undercurl = true })
+
+  -- ============================================================================
+  -- TERMINAL COLORS
+  -- ============================================================================
   local g = vim.g
 
-  g.terminal_color_0 = colors.gray_asparagus
-  g.terminal_color_1 = colors.bright_red
-  g.terminal_color_2 = colors.lemon_glacier
-  g.terminal_color_3 = colors.battleship_gray
-  g.terminal_color_4 = colors.powder_blue
-  g.terminal_color_5 = colors.dark_khaki
-  g.terminal_color_6 = colors.maya_blue
-  g.terminal_color_7 = colors.light_gray
-  g.terminal_color_8 = colors.gray_asparagus
+  g.terminal_color_0 = "#1E1E1E"
+  g.terminal_color_1 = colors.error
+  g.terminal_color_2 = colors.string
+  g.terminal_color_3 = colors.function_name
+  g.terminal_color_4 = colors.number
+  g.terminal_color_5 = colors.constant
+  g.terminal_color_6 = colors.info
+  g.terminal_color_7 = colors.fg
+  g.terminal_color_8 = colors.gutter_fg
   g.terminal_color_9 = colors.bright_red
-  g.terminal_color_10 = colors.lemon_glacier
-  g.terminal_color_11 = colors.battleship_gray
-  g.terminal_color_12 = colors.powder_blue
-  g.terminal_color_13 = colors.dark_khaki
-  g.terminal_color_14 = colors.maya_blue
+  g.terminal_color_10 = colors.bright_green
+  g.terminal_color_11 = colors.bright_yellow
+  g.terminal_color_12 = colors.number
+  g.terminal_color_13 = colors.constant
+  g.terminal_color_14 = colors.info
   g.terminal_color_15 = colors.white
 end
 
