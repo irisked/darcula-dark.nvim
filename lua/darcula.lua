@@ -323,6 +323,7 @@ M.configure_highlights = function()
   hi(0, "DiffRemoved", { fg = colors.bright_red })
   hi(0, "DiffText", { bold = true, ctermbg = 9, fg = colors.powder_blue })
   hi(0, "Directory", { ctermfg = 159, fg = colors.powder_blue })
+  hi(0, "NonText", { ctermfg = 159, fg = colors.powder_blue })
   hi(0, "NeoTreeDirectoryIcon", { ctermfg = 159, fg = colors.ochre })
   hi(0, "NeoTreeGitUntracked", { fg = colors.lemon_glacier })
   hi(0, "NeoTreeGitAdded", { fg = colors.lemon_glacier })
@@ -738,3 +739,4 @@ M.configure_highlights = function()
 end
 
 return M
+
