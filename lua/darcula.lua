@@ -5,7 +5,7 @@ local config = {}
 -- Accurate IntelliJ IDEA Darcula color palette
 local colors = {
   -- Background and foreground
-  bg = "#242424",
+  bg = "#1A1A1A",
   fg = "#B9C7D6",
 
   -- UI colors
@@ -377,8 +377,8 @@ M.configure_highlights = function()
   hi(0, "@lsp.type.parameter.go", { fg = colors.white })
   hi(0, "@lsp.type.property.go", { fg = colors.constant })
   hi(0, "@lsp.typemod.variable.readonly.go", { fg = colors.constant })
-  hi(0, "@lsp.typemod.variable.defaultLibrary.go", { fg = colors.keyword, bold = true })
   hi(0, "@lsp.mod.defaultLibrary.go", { fg = colors.keyword, bold = true })
+  hi(0, "@lsp.typemod.variable.defaultLibrary.go", { link = "@lsp.mod.defaultLibrary.go" })
 
   -- Legacy syntax support for Go
   hi(0, "goImportString", { link = "@string.go" })
