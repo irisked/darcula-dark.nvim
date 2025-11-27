@@ -175,7 +175,7 @@ function M.get()
   G["@lsp.type.enumMember.terraform"] = {}
   G["@lsp.type.parameter.terraform"] = {}
   G["@lsp.type.variable.terraform"] = {}
-  G["@lsp.type.property.terraform"] = {}
+  G["@lsp.type.property.terraform"] = { link = "@variable" }
 
   return G
 end

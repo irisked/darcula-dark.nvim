@@ -48,7 +48,7 @@ local darcula = {
 
   -- Git colors
   git_add = "#72A765",
-  git_change = "#78A7CB",
+  git_change = "#EDB165",
   git_delete = "#CC4F4C",
 
   -- Special colors
@@ -56,7 +56,7 @@ local darcula = {
   link = "#388BEE",
   match = "#3A4D2A",
   search = "#32593D",
-  directory = "#EDB165",
+  directory = "#a4c7f0",
 
   -- UI element colors
   pmenu_bg = "#3C3F41",
