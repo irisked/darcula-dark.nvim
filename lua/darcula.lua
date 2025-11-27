@@ -6,31 +6,31 @@ local config = {}
 local colors = {
   -- Background and foreground
   bg = "#242424",
-  fg = "#A9B7C6",
+  fg = "#B9C7D6",
 
   -- UI colors
   ui_bg = "#3C3F41",
   ui_border = "#323232",
   selection = "#214283",
   line_highlight = "#323232",
-  cursor = "#BBBBBB",
-  gutter_fg = "#606366",
+  cursor = "#CBCBCB",
+  gutter_fg = "#707376",
   gutter_bg = "#313335",
 
   -- Syntax colors (IntelliJ Darcula)
-  keyword = "#CC7832", -- Orange: keywords, control flow
-  string = "#6A8759", -- Green: strings
-  number = "#6897BB", -- Blue: numbers
-  comment = "#808080", -- Gray: comments
-  doc_comment = "#629755", -- Doc green: documentation
-  function_name = "#FFC66D", -- Yellow: function names
-  class_name = "#A9B7C6", -- Default foreground for classes
-  constant = "#9876AA", -- Purple: constants
-  parameter = "#A9B7C6", -- Default foreground
-  type = "#8888C6", -- Built-in type purple
-  decorator = "#BBB529", -- Decorator yellow-green
-  tag = "#E8BF6A", -- Tag yellow
-  attribute = "#BABABA", -- Attribute gray
+  keyword = "#DC8842", -- Orange: keywords, control flow
+  string = "#7A9769", -- Green: strings
+  number = "#78A7CB", -- Blue: numbers
+  comment = "#909090", -- Gray: comments
+  doc_comment = "#72A765", -- Doc green: documentation
+  function_name = "#FFD67D", -- Yellow: function names
+  class_name = "#B9C7D6", -- Default foreground for classes
+  constant = "#A886BA", -- Purple: constants
+  parameter = "#B9C7D6", -- Default foreground
+  type = "#9898D6", -- Built-in type purple
+  decorator = "#CBC539", -- Decorator yellow-green
+  tag = "#F8CF7A", -- Tag yellow
+  attribute = "#CACACA", -- Attribute gray
 
   -- Diff colors
   diff_add = "#294436",
@@ -39,19 +39,19 @@ local colors = {
   diff_text = "#385570",
 
   -- Diagnostic colors
-  error = "#BC3F3C",
-  warning = "#A9B7C6",
-  info = "#6A8759",
-  hint = "#6897BB",
+  error = "#CC4F4C",
+  warning = "#B9C7D6",
+  info = "#7A9769",
+  hint = "#78A7CB",
 
   -- Git colors
-  git_add = "#629755",
-  git_change = "#6897BB",
-  git_delete = "#BC3F3C",
+  git_add = "#72A765",
+  git_change = "#78A7CB",
+  git_delete = "#CC4F4C",
 
   -- Special colors
-  todo = "#A8C023",
-  link = "#287BDE",
+  todo = "#B8D033",
+  link = "#388BEE",
   match = "#3A4D2A",
   search = "#32593D",
 
@@ -62,9 +62,9 @@ local colors = {
   -- Additional colors
   white = "#FFFFFF",
   black = "#000000",
-  bright_red = "#FF6B68",
-  bright_green = "#A8FF60",
-  bright_yellow = "#FFD700",
+  bright_red = "#FF7B78",
+  bright_green = "#B8FF70",
+  bright_yellow = "#FFE710",
 }
 
 ---@class MyModule
