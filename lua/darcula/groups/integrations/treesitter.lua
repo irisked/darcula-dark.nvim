@@ -171,6 +171,12 @@ function M.get()
   G["@lsp.type.string.go"] = {}
   G["@lsp.type.variable.go"] = {}
 
+  G["@lsp.type.type.terraform"] = {}
+  G["@lsp.type.enumMember.terraform"] = {}
+  G["@lsp.type.parameter.terraform"] = {}
+  G["@lsp.type.variable.terraform"] = {}
+  G["@lsp.type.property.terraform"] = {}
+
   return G
 end
 
