@@ -5,7 +5,7 @@ local config = {}
 -- Accurate IntelliJ IDEA Darcula color palette
 local colors = {
   -- Background and foreground
-  bg = "#2B2B2B",
+  bg = "#242424",
   fg = "#A9B7C6",
 
   -- UI colors
@@ -18,19 +18,19 @@ local colors = {
   gutter_bg = "#313335",
 
   -- Syntax colors (IntelliJ Darcula)
-  keyword = "#CC7832",           -- Orange: keywords, control flow
-  string = "#6A8759",            -- Green: strings
-  number = "#6897BB",            -- Blue: numbers
-  comment = "#808080",           -- Gray: comments
-  doc_comment = "#629755",       -- Doc green: documentation
-  function_name = "#FFC66D",     -- Yellow: function names
-  class_name = "#A9B7C6",        -- Default foreground for classes
-  constant = "#9876AA",          -- Purple: constants
-  parameter = "#A9B7C6",         -- Default foreground
-  type = "#8888C6",              -- Built-in type purple
-  decorator = "#BBB529",         -- Decorator yellow-green
-  tag = "#E8BF6A",               -- Tag yellow
-  attribute = "#BABABA",         -- Attribute gray
+  keyword = "#CC7832", -- Orange: keywords, control flow
+  string = "#6A8759", -- Green: strings
+  number = "#6897BB", -- Blue: numbers
+  comment = "#808080", -- Gray: comments
+  doc_comment = "#629755", -- Doc green: documentation
+  function_name = "#FFC66D", -- Yellow: function names
+  class_name = "#A9B7C6", -- Default foreground for classes
+  constant = "#9876AA", -- Purple: constants
+  parameter = "#A9B7C6", -- Default foreground
+  type = "#8888C6", -- Built-in type purple
+  decorator = "#BBB529", -- Decorator yellow-green
+  tag = "#E8BF6A", -- Tag yellow
+  attribute = "#BABABA", -- Attribute gray
 
   -- Diff colors
   diff_add = "#294436",
@@ -310,6 +310,8 @@ M.configure_highlights = function()
   hi(0, "@lsp.type.struct", { fg = colors.class_name })
   hi(0, "@lsp.type.parameter", { fg = colors.parameter })
   hi(0, "@lsp.type.variable", { fg = colors.fg })
+  hi(0, "@lsp.type.variable.go", { fg = colors.parameter })
+  hi(0, "@lsp.type.namespace.go", { fg = colors.fg })
   hi(0, "@lsp.type.property", { fg = colors.constant })
   hi(0, "@lsp.type.enumMember", { fg = colors.constant })
   hi(0, "@lsp.type.function", { fg = colors.function_name })
@@ -365,7 +367,7 @@ M.configure_highlights = function()
   hi(0, "@number.go", { fg = colors.number })
 
   -- LSP semantic tokens for Go
-  hi(0, "@lsp.type.namespace.go", { fg = colors.fg })
+  hi(0, "@lsp.type.namespace.go", { fg = colors.white, bold = true })
   hi(0, "@lsp.type.type.go", { fg = colors.class_name })
   hi(0, "@lsp.type.struct.go", { fg = colors.class_name })
   hi(0, "@lsp.type.interface.go", { fg = colors.class_name })
