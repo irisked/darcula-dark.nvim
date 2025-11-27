@@ -325,7 +325,7 @@ M.configure_highlights = function()
   hi(0, "Directory", { ctermfg = 159, fg = colors.powder_blue })
   hi(0, "NonText", { ctermfg = 159, fg = colors.powder_blue })
   hi(0, "NeoTreeDirectoryIcon", { ctermfg = 159, fg = colors.ochre })
-  hi(0, "NeoTreeGitUntracked", { fg = colors.lemon_glacier })
+  hi(0, "SnacksPickerGitStatusUntracked", { fg = colors.lemon_glacier })
   hi(0, "NeoTreeGitAdded", { fg = colors.lemon_glacier })
   hi(0, "Error", { bg = colors.bright_red, ctermbg = 9, ctermfg = 15, fg = colors.gray_asparagus })
   hi(0, "ErrorMsg", { ctermbg = 1, ctermfg = 15, fg = colors.bright_red })
@@ -739,4 +739,3 @@ M.configure_highlights = function()
 end
 
 return M
-
