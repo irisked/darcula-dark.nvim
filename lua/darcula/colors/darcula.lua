@@ -7,67 +7,67 @@ local darcula = {
   none = "NONE",
 
   -- Background and foreground
-  bg = "#202020",
-  fg = "#B9C7D6",
+  bg = "#202020", -- Very dark gray, almost black
+  fg = "#B9C7D6", -- Light grayish blue
 
   -- UI colors
-  ui_bg = "#202020",
-  ui_border = "#FFD67D",
-  selection = "#323232",
-  line_highlight = "#323232",
-  cursor = "#CBCBCB",
-  gutter_fg = "#707376",
-  gutter_bg = "#313335",
+  ui_bg = "#202020", -- Very dark gray
+  ui_border = "#FFD67D", -- Light yellow/gold
+  selection = "#323232", -- Dark gray
+  line_highlight = "#323232", -- Dark gray
+  cursor = "#CBCBCB", -- Light gray
+  gutter_fg = "#707376", -- Medium gray
+  gutter_bg = "#313335", -- Dark gray
 
   -- Syntax colors (IntelliJ Darcula)
   keyword = "#DC8842", -- Orange: keywords, control flow
-  string = "#7A9769", -- Green: strings
-  number = "#78A7CB", -- Blue: numbers
-  comment = "#909090", -- Gray: comments
-  doc_comment = "#72A765", -- Doc green: documentation
-  function_name = "#ffd67d", -- Yellow: function names
-  class_name = "#a4c7f0", -- Default foreground for classes
-  constant = "#A886BA", -- Purple: constants
-  parameter = "#B9C7D6", -- Default foreground
-  type = "#9898D6", -- Built-in type purple
-  decorator = "#CBC539", -- Decorator yellow-green
-  tag = "#F8CF7A", -- Tag yellow
-  attribute = "#CACACA", -- Attribute gray
+  string = "#7A9769", -- Muted sage green: strings
+  number = "#78A7CB", -- Light blue: numbers
+  comment = "#909090", -- Medium gray: comments
+  doc_comment = "#72A765", -- Green: documentation
+  function_name = "#ffd67d", -- Light yellow/gold: function names
+  class_name = "#a4c7f0", -- Light blue: classes
+  constant = "#A886BA", -- Purple/lavender: constants
+  parameter = "#B9C7D6", -- Light grayish blue: parameters
+  type = "#9898D6", -- Light purple: built-in types
+  decorator = "#CBC539", -- Yellow-green/lime: decorators
+  tag = "#F8CF7A", -- Light yellow/gold: tags
+  attribute = "#CACACA", -- Light gray: attributes
 
   -- Diff colors
-  diff_add = "#294436",
-  diff_change = "#385570",
-  diff_delete = "#484A4A",
-  diff_text = "#385570",
+  diff_add = "#294436", -- Dark green
+  diff_change = "#385570", -- Dark blue
+  diff_delete = "#484A4A", -- Dark gray
+  diff_text = "#385570", -- Dark blue
 
   -- Diagnostic colors
-  error = "#CC4F4C",
-  warning = "#B9C7D6",
-  info = "#7A9769",
-  hint = "#78A7CB",
+  error = "#CC4F4C", -- Red
+  warning = "#B9C7D6", -- Light grayish blue
+  info = "#7A9769", -- Muted green
+  hint = "#78A7CB", -- Light blue
 
   -- Git colors
-  git_add = "#72A765",
-  git_change = "#EDB165",
-  git_delete = "#CC4F4C",
+  git_add = "#72A765", -- Green
+  git_change = "#EDB165", -- Orange/gold
+  git_delete = "#CC4F4C", -- Red
 
   -- Special colors
-  todo = "#B8D033",
-  link = "#388BEE",
-  match = "#3A4D2A",
-  search = "#32593D",
-  directory = "#a4c7f0",
+  todo = "#B8D033", -- Bright lime green
+  link = "#388BEE", -- Bright blue
+  match = "#3A4D2A", -- Dark olive green
+  search = "#32593D", -- Dark green
+  directory = "#a4c7f0", -- Light blue
 
   -- UI element colors
-  pmenu_bg = "#3C3F41",
-  pmenu_sel = "#113A5C",
+  pmenu_bg = "#3C3F41", -- Dark gray
+  pmenu_sel = "#113A5C", -- Dark blue
 
   -- Additional colors
-  white = "#FFFFFF",
-  black = "#000000",
-  bright_red = "#FF7B78",
-  bright_green = "#B8FF70",
-  bright_yellow = "#FFE710",
+  white = "#FFFFFF", -- White
+  black = "#000000", -- Black
+  bright_red = "#FF7B78", -- Bright red/salmon
+  bright_green = "#B8FF70", -- Bright lime green
+  bright_yellow = "#FFE710", -- Bright yellow
 }
 
 return darcula

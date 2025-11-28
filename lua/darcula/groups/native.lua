@@ -151,7 +151,7 @@ function M.get_groups()
   G.SignColumn = { fg = C.gutter_fg, bg = C.gutter_bg }
   G.SignColumnSB = { fg = C.gutter_fg, bg = C.gutter_bg }
   G.Substitute = { bg = C.match, fg = C.white }
-  G.LineNr = { fg = C.gutter_fg, bg = C.gutter_bg }
+  G.LineNr = { fg = C.gutter_fg, bg = C.bg }
   G.MatchParen = { fg = C.bright_yellow, bold = true }
   G.ModeMsg = { fg = C.fg, bold = true }
   G.MsgArea = { fg = C.fg }

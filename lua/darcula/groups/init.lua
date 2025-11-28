@@ -15,10 +15,9 @@ M.get_groups = function()
     gitsigns = "darcula.groups.integrations.gitsigns",
     telescope = "darcula.groups.integrations.telescope",
     nvim_cmp = "darcula.groups.integrations.nvim_cmp",
-    neo_tree = "darcula.groups.integrations.neo_tree",
-    nvim_tree = "darcula.groups.integrations.nvim_tree",
     indent_blankline = "darcula.groups.integrations.indent_blankline",
     snacks = "darcula.groups.integrations.snacks",
+    undotree = "darcula.groups.integrations.undotree",
   }
 
   -- Merge integration highlight groups
