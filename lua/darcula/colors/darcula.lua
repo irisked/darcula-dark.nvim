@@ -25,7 +25,7 @@ local darcula = {
   number = "#78A7CB", -- Light blue: numbers
   comment = "#909090", -- Medium gray: comments
   doc_comment = "#72A765", -- Green: documentation
-  function_name = "#ffd67d", -- Light yellow/gold: function names
+  function_name = "#ffca4d", -- Light yellow/gold: function names
   class_name = "#a4c7f0", -- Light blue: classes
   constant = "#A886BA", -- Purple/lavender: constants
   parameter = "#B9C7D6", -- Light grayish blue: parameters
@@ -42,7 +42,7 @@ local darcula = {
 
   -- Diagnostic colors
   error = "#CC4F4C", -- Red
-  warning = "#B9C7D6", -- Light grayish blue
+  warning = "#EDB165", -- Orange/gold
   info = "#7A9769", -- Muted green
   hint = "#78A7CB", -- Light blue
 

@@ -28,6 +28,7 @@ M.defaults = {
     nvim_cmp = true,
     indent_blankline = true,
     snacks = true,
+    vim_helm = true,
   },
 }
 

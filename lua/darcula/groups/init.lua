@@ -18,6 +18,7 @@ M.get_groups = function()
     indent_blankline = "darcula.groups.integrations.indent_blankline",
     snacks = "darcula.groups.integrations.snacks",
     undotree = "darcula.groups.integrations.undotree",
+    vim_helm = "darcula.groups.integrations.vim_helm",
   }
 
   -- Merge integration highlight groups
