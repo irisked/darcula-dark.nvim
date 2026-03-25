@@ -170,6 +170,7 @@ function M.get()
   G["@lsp.type.number.go"] = {}
   G["@lsp.type.string.go"] = {}
   G["@lsp.type.variable.go"] = {}
+  G["@lsp.typemod.function.signature.go"] = { link = "@function" }
 
   G["@lsp.type.type.terraform"] = {}
   G["@lsp.type.enumMember.terraform"] = {}
