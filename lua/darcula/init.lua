@@ -30,6 +30,12 @@ M.load = function()
   -- Enable true color support
   vim.o.termguicolors = true
 
+  -- Enable rounded borders for floating windows (e.g. LSP hover on <Shift>+K)
+  -- Requires Neovim 0.11+; only set if the user hasn't configured one already
+  if vim.fn.has("nvim-0.11") == 1 and vim.o.winborder == "" then
+    vim.o.winborder = "rounded"
+  end
+
   -- Set semantic token priority
   vim.highlight.priorities.semantic_tokens = 120
 
