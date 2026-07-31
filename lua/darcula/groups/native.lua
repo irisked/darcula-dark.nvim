@@ -148,10 +148,10 @@ function M.get_groups()
   G.WinSeparator = { fg = C.ui_border }
   G.Folded = { fg = C.gutter_fg, bg = C.line_highlight }
   G.FoldColumn = { fg = C.gutter_fg, bg = C.gutter_bg }
-  G.SignColumn = { fg = C.gutter_fg, bg = C.gutter_bg }
-  G.SignColumnSB = { fg = C.gutter_fg, bg = C.gutter_bg }
+  G.SignColumn = { fg = C.fg, bg = C.bg }
+  G.SignColumnSB = { fg = C.fg, bg = C.bg }
   G.Substitute = { bg = C.match, fg = C.white }
-  G.LineNr = { fg = C.gutter_fg, bg = C.bg }
+  G.LineNr = { fg = C.gutter_fg, bg = C.gutter_bg }
   G.MatchParen = { fg = C.bright_yellow, bold = true }
   G.ModeMsg = { fg = C.fg, bold = true }
   G.MsgArea = { fg = C.fg }

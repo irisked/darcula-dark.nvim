@@ -19,6 +19,7 @@ M.get_groups = function()
     snacks = "darcula.groups.integrations.snacks",
     undotree = "darcula.groups.integrations.undotree",
     vim_helm = "darcula.groups.integrations.vim_helm",
+    render_markdown = "darcula.groups.integrations.render-markdown",
   }
 
   -- Merge integration highlight groups

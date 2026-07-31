@@ -59,7 +59,7 @@ local darcula = {
   directory = "#a4c7f0", -- Light blue
 
   -- UI element colors
-  pmenu_bg = "#3C3F41", -- Dark gray
+  pmenu_bg = "#CC4F4C", -- Dark gray
   pmenu_sel = "#113A5C", -- Dark blue
 
   -- Additional colors

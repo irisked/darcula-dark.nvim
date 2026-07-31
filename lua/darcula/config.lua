@@ -29,6 +29,7 @@ M.defaults = {
     indent_blankline = true,
     snacks = true,
     vim_helm = true,
+    render_markdown = true,
   },
 }
 
